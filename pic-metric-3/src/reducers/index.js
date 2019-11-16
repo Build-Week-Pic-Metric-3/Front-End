@@ -1,4 +1,3 @@
-
 import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
@@ -8,7 +7,9 @@ import {
   EDIT,
   EDIT_FAILED,
   DELETE,
-  DELETE_FAILED } from '../actions';
+  DELETE_FAILED, 
+  REGISTER_LOADING,
+  REGISTER_FAILED} from '../actions';
 
 export const initialState = {
   photos: [],
@@ -34,6 +35,26 @@ export const reducer = ( state = initialState, action ) => {
         error: null
       }
     case LOGIN_FAILED:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
+    case REGISTER_LOADING:
+      return {
+        ...state,
+        isFetching: false,
+        error: null
+      }
+    case REGISTER_SUCCESS:
+      sessionStorage.setItem( 'token', action.payload );
+      return {
+        ...state,
+        isLoggedIn: true,
+        isFetching: false,
+        error: null
+      }
+    case REGISTER_FAILED:
       return {
         ...state,
         isFetching: false,

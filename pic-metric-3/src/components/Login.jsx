@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { LoginFunction } from '../actions';
+import { login } from '../actions';
 
 const Login = props => {
   const [ credentials, setCredentials ] = useState( { username: '', password: '' } );
@@ -16,7 +16,7 @@ const Login = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch( LoginFunction( credentials.username, credentials.password, props.history ) );
+    dispatch( login( credentials.username, credentials.password, props.history ) );
   };
 
   return (

@@ -4,6 +4,10 @@ export const LOGIN_LOADING        = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS        = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED         = 'LOGIN_FAILED';
 
+export const REGISTER_LOADING     = 'REGISTER_LOADING';
+export const REGISTER_SUCCESS     = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED      = 'REGISTER_FAILED';
+
 export const ADD                  = 'ADD';
 export const ADD_FAILED           = 'ADD_FAILED';
 
@@ -14,8 +18,8 @@ export const DELETE               = 'DELETE';
 export const DELETE_FAILED        = 'DELETE_FAILED';
 
 
-
-export const loginLoading   = () => ( { type: LOGIN_LOADING } );
+export const registerLoading = () => ( { type: REGISTER_LOADING } );
+export const loginLoading    = () => ( { type: LOGIN_LOADING    } );
 
 export const loginSuccess = ( data, history ) => {
   return dispatch => {
@@ -29,6 +33,21 @@ export const loginSuccess = ( data, history ) => {
 
 export const loginFailure = error => ( {
   type: LOGIN_FAILED,
+  payload: error
+} );
+
+export const registerSuccess = ( data, history ) => {
+  return dispatch => {
+    dispatch( {
+      type: REGISTER_SUCCESS,
+      payload: data
+    } );
+    history.push( '/protected' );
+  }
+};
+
+export const registerFailure = error => ( {
+  type: REGISTER_FAILED,
   payload: error
 } );
 
@@ -71,7 +90,7 @@ const axiosWithAuth = () => {
   } );
 };
 
-export function LoginFunction( name, pass, history ) {
+export function login( name, pass, history ) {
   return function( dispatch ) {
     dispatch( loginLoading() );
 
@@ -79,6 +98,17 @@ export function LoginFunction( name, pass, history ) {
       .post( 'http://localhost:5000/api/login', { username: name, password: pass } )
       .then ( res   => dispatch( loginSuccess( res.data.payload, history ) ) )
       .catch( error => dispatch( loginFailure( error ) ) );
+  }
+}
+
+export function register( name, pass, mail, history ) {
+  return function( dispatch ) {
+    dispatch( registerLoading() );
+
+    return axios
+      .post( 'http://localhost:5000/api/register', { username: name, password: pass, email: mail } )
+      .then ( res   => dispatch( registerSuccess( res.data.payload, history ) ) )
+      .catch( error => dispatch( registerFailure( error ) ) );
   }
 }
 
