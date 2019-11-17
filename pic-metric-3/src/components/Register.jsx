@@ -85,8 +85,8 @@ const Register = props => {
                 name        = 'passwordConf'
                 placeholder = 'confirm password'
                 value       = { values.passwordConf }
-                onChange    = { handleChange }
-                onBlur      = { handleBlur      }
+                onChange    = { handleChange        }
+                onBlur      = { handleBlur          }
                 className   = { errors.passwordConf && touched.passwordConf && 'error' }
               />
             </label>
