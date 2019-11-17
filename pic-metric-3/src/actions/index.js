@@ -90,24 +90,24 @@ const axiosWithAuth = () => {
   } );
 };
 
-export function login( name, pass, history ) {
+export function login( mail, pass, history ) {
   return function( dispatch ) {
     dispatch( loginLoading() );
 
     return axios
-      .post( 'http://localhost:5000/api/login', { username: name, password: pass } )
-      .then ( res   => dispatch( loginSuccess( res.data.payload, history ) ) )
+      .post ( 'http://localhost:5000/api/login', { email: mail, password: pass } )
+      .then ( res   => dispatch( loginSuccess( res.data.payload, history     ) ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
 }
 
-export function register( name, pass, mail, history ) {
+export function register( mail, pass, history ) {
   return function( dispatch ) {
     dispatch( registerLoading() );
 
     return axios
-      .post( 'http://localhost:5000/api/register', { username: name, password: pass, email: mail } )
-      .then ( res   => dispatch( registerSuccess( res.data.payload, history ) ) )
+      .post ( 'http://localhost:5000/api/register', { email: mail, password: pass } )
+      .then ( res   => dispatch( registerSuccess( res.data.payload, history     ) ) )
       .catch( error => dispatch( registerFailure( error ) ) );
   }
 }
@@ -126,15 +126,15 @@ export function FetchPhotos( header ) {
   }
 } */
 
-export function AddPhoto( color ) {
+export function AddPhoto( photo ) {
   return function( dispatch ) {
 
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .post( 'http://localhost:5000/api/colors', color   )
-      .then ( res   => dispatch( addSuccess( color ) ) )
-      .catch( error => dispatch( addFailure( error ) ) );
+      .post ( 'http://localhost:5000/api/photos', photo   )
+      .then ( res   => dispatch( addSuccess( photo    ) ) )
+      .catch( error => dispatch( addFailure( error    ) ) );
   }
 }
 
@@ -143,7 +143,7 @@ export function EditPhoto( photo ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .put( `http://localhost:5000/api/colors/${ photo.id }`, photo )
+      .put( `http://localhost:5000/api/photos/${ photo.id }`, photo )
       .then ( res   => dispatch( editSuccess( res.data ) ) )
       .catch( error => dispatch( editFailure( error    ) ) );
   }
@@ -155,8 +155,8 @@ export function DeletePhoto( id ) {
     console.log( id );
 
     return authAxios
-      .delete( `http://localhost:5000/api/colors/${ id }` )
-      .then ( res   => dispatch( deleteSuccess( res   ) ) )
-      .catch( error => dispatch( deleteFailure( error ) ) );
+      .delete( `http://localhost:5000/api/photos/${ id }`  )
+      .then  ( res   => dispatch( deleteSuccess( res   ) ) )
+      .catch ( error => dispatch( deleteFailure( error ) ) );
   }
 }

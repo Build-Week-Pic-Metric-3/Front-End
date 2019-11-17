@@ -14,7 +14,7 @@ import {
 export const initialState = {
   photos: [],
   isLoggedIn: sessionStorage.getItem( 'token' ) ? true : false,
-  error: null,
+  error:      null,
   isFetching: false
 };
 
@@ -24,7 +24,7 @@ export const reducer = ( state = initialState, action ) => {
       return {
         ...state,
         isFetching: false,
-        error: null
+        error:      null
       }
     case LOGIN_SUCCESS:
       sessionStorage.setItem( 'token', action.payload );
@@ -32,7 +32,7 @@ export const reducer = ( state = initialState, action ) => {
         ...state,      
         isLoggedIn: true,
         isFetching: false,
-        error: null
+        error:      null
       }
     case LOGIN_FAILED:
       return {
@@ -44,7 +44,7 @@ export const reducer = ( state = initialState, action ) => {
       return {
         ...state,
         isFetching: false,
-        error: null
+        error:      null
       }
     case REGISTER_SUCCESS:
       sessionStorage.setItem( 'token', action.payload );
@@ -52,7 +52,7 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         isLoggedIn: true,
         isFetching: false,
-        error: null
+        error:      null
       }
     case REGISTER_FAILED:
       return {
