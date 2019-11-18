@@ -1,32 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const UploadPhotoContainer = styled.div`
+const UploadCont = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  height: 27rem;
 `
 
-const NewExistingPhotoContainer = styled.div`
+const UploadOrBrowseCont = styled.div`
   display: flex;
-  
+  align-items: center;
+  justify-content: space-around;
+  background: #F7F9FA;
+  width: 90%;
+  height: 20rem;
+`
+
+const UploadOrBrowseChildren = styled.div`
+  border: 2px solid black;
+  height: 15rem;
+  width: 15rem;
+
 `
 
 const UploadPhoto = props => {
 
   return (
-    <UploadPhotoContainer>
+    <UploadCont>
       <h3>Upload A Photo</h3>
-      <div>
-        <div>
+      <UploadOrBrowseCont>
+        <UploadOrBrowseChildren>
           New Photo
-        </div>
-        <div>
+        </UploadOrBrowseChildren>
+        <UploadOrBrowseChildren>
           Browse Existing Photos
-        </div>
-      </div>
-    </UploadPhotoContainer>
+        </UploadOrBrowseChildren>
+      </UploadOrBrowseCont>
+    </UploadCont>
   )
 }
 

@@ -7,16 +7,22 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import NavBar from './NavBar';
+import UploadPhoto from './UploadPhoto'
+
+const Welcome = styled.h3`
+  text-align: center;
+`
 
 const Dashboard = props => {
 
   return (
     <div>
       <NavBar />
-      <div>
+      <Welcome>
         <h3>Welcome to Pic Metric 3!</h3>
-        
-      </div>
+
+      </Welcome>
+      <UploadPhoto />
     </div>
   )
 }
