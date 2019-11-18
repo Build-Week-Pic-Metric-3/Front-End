@@ -15,6 +15,7 @@ const UploadOrBrowseCont = styled.div`
   background: #F7F9FA;
   width: 90%;
   height: 20rem;
+  margin-bottom: 2rem;
 `
 
 const UploadOrBrowseChildren = styled.div`
