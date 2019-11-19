@@ -9,7 +9,7 @@ import NavBar from './NavBar';
 import UploadPhoto from './UploadPhoto';
 import Gallery from './Gallery';
 
-const Welcome = styled.h3`
+const Welcome = styled.div`
   text-align: center;
 `
 

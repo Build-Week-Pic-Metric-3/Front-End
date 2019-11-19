@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions';
 
 import { Formik } from 'formik';
-import * as EmailValidator from 'email-validator';
 import * as Yup from 'yup';
 
 const Login = props => {
