@@ -12,6 +12,10 @@ export const FETCH_PHOTOS_SUCCESS = 'FETCH_PHOTOS_SUCCESS';
 export const FETCH_PHOTOS_LOADING = 'FETCH_PHOTOS_LOADING';
 export const FETCH_PHOTOS_FAILED  = 'FETCH_PHOTOS_FAILED';
 
+export const DS_LOADING           = 'DS_LOADING';
+export const DS_LOAD_SUCCESS      = 'DS_LOAD_SUCCESS';
+export const DS_LOAD_FAILURE      = 'DS_LOAD_FAILURE';
+
 export const ADD                  = 'ADD';
 export const ADD_FAILED           = 'ADD_FAILED';
 
@@ -22,6 +26,7 @@ export const DELETE_FAILED        = 'DELETE_FAILED';
 export const registerLoading    = () => ( { type: REGISTER_LOADING     } );
 export const loginLoading       = () => ( { type: LOGIN_LOADING        } );
 export const fetchPhotosLoading = () => ( { type: FETCH_PHOTOS_LOADING } );
+export const dsLoading          = () => ( { type: DS_LOADING           } );
 
 export const loginSuccess = ( data, history ) => {
   return dispatch => {
@@ -60,6 +65,16 @@ export const fetchPhotosSuccess = data => ( {
 
 export const fetchPhotosFailure = error => ( {
   type: FETCH_PHOTOS_FAILED,
+  payload: error
+} );
+
+export const dsSubmitSuccess = data => ( {
+  type: DS_LOAD_SUCCESS,
+  payload: data
+} );
+
+export const dsSubmitFailure = error => ( {
+  type: DS_LOAD_FAILURE,
   payload: error
 } );
 
@@ -122,7 +137,7 @@ export function FetchPhotos( header ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .get( 'https://pic-metric-backend.herokuapp.com/photos' )
+      .get  ( 'https://pic-metric-backend.herokuapp.com/photos' )
       .then ( res   => dispatch( fetchPhotosSuccess( res.data ) ) )
       .catch( error => dispatch( fetchPhotosFailure( error    ) ) );
   }
@@ -152,11 +167,14 @@ export function DeletePhoto( id ) {
 }
 
 export function dsSubmit ( values ) {
-  const {photoURL} = values
-  const dsSubmission = [photoURL];
+  return function( dispatch ) {
+    dispatch( dsLoading )
+    const { photoURL } = values
+    const dsSubmission = [ photoURL ];
   
-  axios
-    .post ('http://18.191.49.69:5000/do_data_science', dsSubmission)
-    .then (res => dispatch( dsSubmitSuccess (res) ) )
-    .catch (error => dispatch( dsSubmitFailure (error) ) );
+    return axios
+      .post( 'http://18.191.49.69:5000/do_data_science', dsSubmission )
+      .then ( res   => dispatch( dsSubmitSuccess ( res   ) ) )
+      .catch( error => dispatch( dsSubmitFailure ( error ) ) );
   }
+}
