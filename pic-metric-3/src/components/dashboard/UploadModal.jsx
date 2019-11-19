@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { dsSubmit } from '../../actions';
 
 const ModalDiv = styled.div`
   position: absolute;
@@ -22,7 +23,7 @@ const CloseButton = styled.div`
   cursor: pointer;
 `
 
-const UploadModal = ({ togglePopup, values, errors, touched, status }) => {
+const UploadModal = ({ togglePopup, values, errors, touched, status, user, dsSubmit, dispatch }) => {
   useEffect(() => {
     status && console.log(status) // axios.post to the backend
   }, [status])
@@ -52,15 +53,13 @@ const UploadModalWithFormik = withFormik({
       .required('Enter your URL here')
       .url('Invalid URL. Enter a valid URL (ex. https://google.com)')
   }),
-  handleSubmit(values, { resetForm, setSubmitting, setStatus }) {
+  handleSubmit(values, { resetForm, setSubmitting, setStatus, dispatch, dsSubmit }) {
     console.log("that's a url, nice", values)
-    const dispatch = props.dispatch;
-    useEffect( () => { 
+    // const dispatch = props.dispatch;
     async function submit() {
       await dispatch( dsSubmit() );
     }
     submit();
-  }, [dispatch] );
 
     // const {photoURL} = values
     // const dsSubmission = [photoURL];
