@@ -96,7 +96,7 @@ export function login( mail, pass, history ) {
     dispatch( loginLoading() );
 
     return axios
-      .post ( 'http://localhost:5000/auth/login', { email: mail, password: pass } )
+      .post ( 'https://pic-metric-backend.herokuapp.com/auth/login', { email: mail, password: pass } )
       .then ( res   => dispatch( loginSuccess( res.data.payload, history     ) ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
@@ -107,13 +107,14 @@ export function register( mail, pass, history ) {
     dispatch( registerLoading() );
 
     return axios
-      .post ( 'http://localhost:5000/auth/register', { email: mail, password: pass } )
+      .post ( 'https://pic-metric-backend.herokuapp.com/auth/register', { email: mail, password: pass } )
       .then ( res   => dispatch( registerSuccess( res.data.payload, history     ) ) )
       .catch( error => dispatch( registerFailure( error ) ) );
   }
 }
 
- 
+ //http://18.191.49.69:5000/do_data_science
+
 export function FetchPhotos( header ) {
   return function( dispatch ) {
     dispatch( photosLoading() );
@@ -121,7 +122,7 @@ export function FetchPhotos( header ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .get( 'http://localhost:5000/photos' )
+      .get( 'https://pic-metric-backend.herokuapp.com/photos' )
       .then ( res   => dispatch( photosLoadSuccess( res.data ) ) )
       .catch( error => dispatch( photosLoadFailure( error    ) ) );
   }
@@ -133,7 +134,7 @@ export function AddPhoto( photo ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .post ( 'http://localhost:5000/photos', photo   )
+      .post ( 'https://pic-metric-backend.herokuapp.com/photos', photo   )
       .then ( res   => dispatch( addSuccess( photo    ) ) )
       .catch( error => dispatch( addFailure( error    ) ) );
   }
@@ -144,7 +145,7 @@ export function DeletePhoto( id ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .delete( `http://localhost:5000/photos/${ id }`  )
+      .delete( `https://pic-metric-backend.herokuapp.com/photos/${ id }`  )
       .then  ( res   => dispatch( deleteSuccess( res   ) ) )
       .catch ( error => dispatch( deleteFailure( error ) ) );
   }
