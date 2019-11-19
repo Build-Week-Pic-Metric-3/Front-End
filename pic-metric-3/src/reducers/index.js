@@ -4,15 +4,25 @@ import {
   LOGIN_FAILED,
   ADD,
   ADD_FAILED,
-  EDIT,
-  EDIT_FAILED,
   DELETE,
   DELETE_FAILED, 
   REGISTER_LOADING,
   REGISTER_FAILED} from '../actions';
 
 export const initialState = {
-  photos: [],
+  user: {
+    id: '',
+    photos: [ {
+      id: '',
+      url: '',
+      pred: [
+        {
+          id: 'resnet',
+          data: {}
+        }
+      ]
+    } ]
+  },
   isLoggedIn: sessionStorage.getItem( 'token' ) ? true : false,
   error:      null,
   isFetching: false
@@ -67,17 +77,6 @@ export const reducer = ( state = initialState, action ) => {
         error: null
       }
     case ADD_FAILED:
-      return {
-        ...state,
-        error: action.payload
-      }
-    case EDIT:
-      return {
-        ...state,
-        photos: state.photos.map( photo => photo.id === action.payload.id ? action.payload : photo ),
-        error: null
-      }
-    case EDIT_FAILED:
       return {
         ...state,
         error: action.payload

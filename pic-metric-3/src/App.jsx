@@ -15,10 +15,10 @@ function App() {
         <Route path = '/register' render = { ( props ) =>
           <Register { ...props } /> } />
         <Switch>
-          <PrivateRoute path  = '/protected'>
+          <PrivateRoute  path = '/protected'>
             <Route exact path = '/protected' component = {  } />
           </PrivateRoute>
-          <Route exact path   = '/login'     render    = { ( props ) =>
+          <Route   exact path = '/login'     render    = { ( props ) =>
             <Login { ...props } /> } />
         </Switch>
       </div>
