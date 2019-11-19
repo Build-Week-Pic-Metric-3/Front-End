@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+
+import UploadModalWithFormik from './UploadModal';
 
 const UploadCont = styled.div`
   display: flex;
@@ -27,8 +29,10 @@ const UploadOrBrowseChildren = styled.div`
 
 const UploadPhoto = props => {
 
-  const formPopup = () => {
-    
+  const [displayModal, setDisplayModal] = useState(false);
+
+  const togglePopup = () => {
+    setDisplayModal(!displayModal);
   }
 
   return (
@@ -37,7 +41,10 @@ const UploadPhoto = props => {
       <UploadOrBrowseCont>
         <UploadOrBrowseChildren>
           <h3>New Photo</h3>
-          <button>Upload</button>
+          <button onClick={togglePopup}>Upload</button>
+          <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
+            <UploadModalWithFormik togglePopup={togglePopup} />
+          </div>
         </UploadOrBrowseChildren>
         <UploadOrBrowseChildren>
           Browse Existing Photos

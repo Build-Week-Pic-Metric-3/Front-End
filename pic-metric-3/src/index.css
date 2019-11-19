@@ -15,3 +15,11 @@ code {
 * {
   box-sizing: border-box;
 }
+
+.modal-invisible {
+  display: none;
+}
+
+.modal-visible {
+  display: block;
+}
