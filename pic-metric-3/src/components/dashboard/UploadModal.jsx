@@ -53,6 +53,7 @@ const UploadModalWithFormik = withFormik({
       .url('Invalid URL. Enter a valid URL (ex. https://google.com)')
   }),
   handleSubmit(values, { resetForm, setSubmitting, setStatus }) {
+    console.log("that's a url, nice")
     // axios
     //   .post('https://blahblahbackend.in', values)
     //   .then(response => {

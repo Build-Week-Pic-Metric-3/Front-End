@@ -13,15 +13,19 @@ const ImgsCont = styled.div`
   align-items: flex-start;
 ` 
 
+const Img = styled.img`
+  width: 30%;
+`
+
 const Gallery = props => {
 
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
-        <img src="https://unsplash.com/photos/4_QbgDuj8z4" alt="skateboard"/>
-        <img src="https://unsplash.com/photos/bbunIoelmWc" alt="clothes pin"/>
-        <img src="https://unsplash.com/photos/VSmeUNx8lnc" alt="bicycle seat"/>
+        <Img src="https://images.unsplash.com/photo-1466074395296-41cba23ce4f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1068&q=80" alt="skateboard"/>
+        <Img src="https://images.unsplash.com/photo-1485828877394-d0e861d7d16e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="clothes pin"/>
+        <Img src="https://images.unsplash.com/photo-1464796147878-5d2c9706db89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="bicycle seat"/>
       </ImgsCont>
     </GalleryCont>
   )
