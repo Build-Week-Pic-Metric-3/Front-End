@@ -117,14 +117,14 @@ export function register( mail, pass, history ) {
 
 export function FetchPhotos( header ) {
   return function( dispatch ) {
-    dispatch( photosLoading() );
+    dispatch( fetchPhotosLoading() );
 
     const authAxios = axiosWithAuth();
 
     return authAxios
       .get( 'https://pic-metric-backend.herokuapp.com/photos' )
-      .then ( res   => dispatch( photosLoadSuccess( res.data ) ) )
-      .catch( error => dispatch( photosLoadFailure( error    ) ) );
+      .then ( res   => dispatch( fetchPhotoSuccess( res.data ) ) )
+      .catch( error => dispatch( fetchPhotoFailure( error    ) ) );
   }
 }
 
