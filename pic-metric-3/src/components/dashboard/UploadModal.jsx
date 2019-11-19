@@ -54,8 +54,16 @@ const UploadModalWithFormik = withFormik({
   }),
   handleSubmit(values, { resetForm, setSubmitting, setStatus }) {
     console.log("that's a url, nice", values)
-    const {photoURL} = values
-    const dsSubmission = [photoURL];
+    const dispatch = props.dispatch;
+    useEffect( () => { 
+    async function submit() {
+      await dispatch( dsSubmit() );
+    }
+    submit();
+  }, [dispatch] );
+
+    // const {photoURL} = values
+    // const dsSubmission = [photoURL];
     // axios
     //   .post('https://blahblahbackend.in', dsSubmission)
     //   .then(response => {
@@ -70,4 +78,12 @@ const UploadModalWithFormik = withFormik({
   }
 })(UploadModal);
 
-export default UploadModalWithFormik;
+const mapDispatchToProps = {
+  dsSubmit
+};
+
+const mapStateToProps = state => {
+  return { user: state.user}
+};
+
+export default connect(state => state)(UploadModalWithFormik); 

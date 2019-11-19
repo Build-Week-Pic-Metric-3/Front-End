@@ -113,7 +113,7 @@ export function register( mail, pass, history ) {
   }
 }
 
- //http://18.191.49.69:5000/do_data_science
+ 
 
 export function FetchPhotos( header ) {
   return function( dispatch ) {
@@ -123,8 +123,8 @@ export function FetchPhotos( header ) {
 
     return authAxios
       .get( 'https://pic-metric-backend.herokuapp.com/photos' )
-      .then ( res   => dispatch( fetchPhotoSuccess( res.data ) ) )
-      .catch( error => dispatch( fetchPhotoFailure( error    ) ) );
+      .then ( res   => dispatch( fetchPhotosSuccess( res.data ) ) )
+      .catch( error => dispatch( fetchPhotosFailure( error    ) ) );
   }
 }
 
@@ -150,3 +150,13 @@ export function DeletePhoto( id ) {
       .catch ( error => dispatch( deleteFailure( error ) ) );
   }
 }
+
+export function dsSubmit ( values ) {
+  const {photoURL} = values
+  const dsSubmission = [photoURL];
+  
+  axios
+    .post ('http://18.191.49.69:5000/do_data_science', dsSubmission)
+    .then (res => dispatch( dsSubmitSuccess (res) ) )
+    .catch (error => dispatch( dsSubmitFailure (error) ) );
+  }
