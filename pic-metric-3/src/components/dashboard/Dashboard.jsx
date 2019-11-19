@@ -27,4 +27,8 @@ const Dashboard = props => {
   )
 }
 
+const mapStateToProps = state => {
+  return { user: state.user}
+};
+
 export default connect(state => state)(Dashboard);
