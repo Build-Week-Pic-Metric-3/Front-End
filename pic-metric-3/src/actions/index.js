@@ -43,13 +43,13 @@ export const loginFailure = error => ( {
   payload: error
 } );
 
-export const registerSuccess = ( data, history ) => {
+export const registerSuccess = ( data, pass, history ) => {
   return dispatch => {
     dispatch( {
       type: REGISTER_SUCCESS,
       payload: data
     } );
-    history.push( '/protected' );
+    dispatch( login( data.username, pass, history ) );
   }
 };
 
@@ -111,8 +111,9 @@ export function login( mail, pass, history ) {
     dispatch( loginLoading() );
 
     return axios
-      .post ( 'https://pic-metric-backend.herokuapp.com/auth/login', { email: mail, password: pass } )
-      .then ( res   => dispatch( loginSuccess( res.data.payload, history     ) ) )
+      .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/login', { username: mail, password: pass } )
+      // .then( res => console.log( res ))
+      .then ( res   => dispatch( loginSuccess( res.data, history ) ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
 }
@@ -122,8 +123,9 @@ export function register( mail, pass, history ) {
     dispatch( registerLoading() );
 
     return axios
-      .post ( 'https://pic-metric-backend.herokuapp.com/auth/register', { email: mail, password: pass } )
-      .then ( res   => dispatch( registerSuccess( res.data.payload, history     ) ) )
+      .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/register', { username: mail, password: pass } )
+      // .then ( res   => console.log(res))
+      .then ( res   => dispatch( registerSuccess( res.data, pass, history ) ) )
       .catch( error => dispatch( registerFailure( error ) ) );
   }
 }
@@ -137,7 +139,7 @@ export function FetchPhotos( header ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .get  ( 'https://pic-metric-backend.herokuapp.com/photos' )
+      .get  ( 'https://pic-metric-backend.herokuapp.com/api/photos' )
       .then ( res   => dispatch( fetchPhotosSuccess( res.data ) ) )
       .catch( error => dispatch( fetchPhotosFailure( error    ) ) );
   }
@@ -149,7 +151,7 @@ export function AddPhoto( photo ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .post ( 'https://pic-metric-backend.herokuapp.com/photos', photo   )
+      .post ( 'https://pic-metric-backend.herokuapp.com/api/photos', photo   )
       .then ( res   => dispatch( addSuccess( photo    ) ) )
       .catch( error => dispatch( addFailure( error    ) ) );
   }
@@ -160,7 +162,7 @@ export function DeletePhoto( id ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .delete( `https://pic-metric-backend.herokuapp.com/photos/${ id }`  )
+      .delete( `https://pic-metric-backend.herokuapp.com/api/photos/${ id }`  )
       .then  ( res   => dispatch( deleteSuccess( res   ) ) )
       .catch ( error => dispatch( deleteFailure( error ) ) );
   }

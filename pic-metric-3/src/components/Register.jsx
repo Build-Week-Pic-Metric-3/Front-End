@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { register } from '../actions';
 
 import { Formik } from 'formik';
-import * as EmailValidator from 'email-validator';
 import * as Yup from 'yup';
 
 const initialData = {
@@ -29,15 +28,21 @@ const Register = props => {
         email:
           Yup.string()
             .email()
+            .label   ( 'Email'    )
             .required( 'Required' ),
         password:
           Yup.string()
-            .required( 'No password provided' )
-            .min     ( 8, 'Password is too short - 8 chars minimum'    )
+            .required( 'Required' )
+            .label   ( 'Password' )
+            .min     ( 3, 'Password is too short - 3 chars minimum'    )
             .matches ( /(?=.*[0-9])/, 'Password must contain a number' ),
         passwordConf:
           Yup.string()
-            .oneOf( [ Yup.ref( 'password' ), null ], 'Passwords must match' )
+            .required( 'Passwords must match' )
+            .label   ( 'Password Confirmation')
+            .test    ( 'passwords-match', 'Passwords must match', function( value ) {
+              return this.parent.password === value;
+            } )
       } ) }
     >
       { props => {
