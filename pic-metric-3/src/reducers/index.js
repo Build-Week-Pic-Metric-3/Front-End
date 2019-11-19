@@ -4,36 +4,44 @@ import {
   LOGIN_FAILED,
   ADD,
   ADD_FAILED,
-  EDIT,
-  EDIT_FAILED,
   DELETE,
-  DELETE_FAILED, 
+  DELETE_FAILED,
   REGISTER_LOADING,
   REGISTER_SUCCESS,
   REGISTER_FAILED} from '../actions';
 
 export const initialState = {
-  photos: [],
-  isLoggedIn: sessionStorage.getItem( 'token' ) ? true : false,
-  error:      null,
+  user: {
+    id: '',
+    photos: [ {
+      id: '',
+      url: '',
+      pred: [ {
+        id: 'resnet',
+        data: {}
+      } ]
+    } ]
+  },
+  isLoggedIn: sessionStorage.getItem('token') ? true : false,
+  error: null,
   isFetching: false
 };
 
-export const reducer = ( state = initialState, action ) => {
-  switch ( action.type ) {
+export const reducer = (state = initialState, action) => {
+  switch (action.type) {
     case LOGIN_LOADING:
       return {
         ...state,
         isFetching: false,
-        error:      null
+        error: null
       }
     case LOGIN_SUCCESS:
-      sessionStorage.setItem( 'token', action.payload );
+      sessionStorage.setItem('token', action.payload);
       return {
-        ...state,      
+        ...state,
         isLoggedIn: true,
         isFetching: false,
-        error:      null
+        error: null
       }
     case LOGIN_FAILED:
       return {
@@ -45,15 +53,15 @@ export const reducer = ( state = initialState, action ) => {
       return {
         ...state,
         isFetching: false,
-        error:      null
+        error: null
       }
     case REGISTER_SUCCESS:
-      sessionStorage.setItem( 'token', action.payload );
+      sessionStorage.setItem('token', action.payload);
       return {
         ...state,
         isLoggedIn: true,
         isFetching: false,
-        error:      null
+        error: null
       }
     case REGISTER_FAILED:
       return {
@@ -64,7 +72,7 @@ export const reducer = ( state = initialState, action ) => {
     case ADD:
       return {
         ...state,
-        photos: [ ...state.photos, action.payload ],
+        photos: [...state.photos, action.payload],
         error: null
       }
     case ADD_FAILED:
@@ -72,21 +80,10 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         error: action.payload
       }
-    case EDIT:
-      return {
-        ...state,
-        photos: state.photos.map( photo => photo.id === action.payload.id ? action.payload : photo ),
-        error: null
-      }
-    case EDIT_FAILED:
-      return {
-        ...state,
-        error: action.payload
-      }
     case DELETE:
       return {
         ...state,
-        photos: state.photos.filter( photo => photo.id !== action.payload.data ),
+        photos: state.photos.filter(photo => photo.id !== action.payload.data),
         error: null
       }
     case DELETE_FAILED:

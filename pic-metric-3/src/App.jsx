@@ -23,7 +23,7 @@ function App() {
           <PrivateRoute path  = '/protected'>
             <Route exact path = '/protected' component = { Dashboard } />
           </PrivateRoute>
-          <Route exact path   = '/login'     render    = { ( props ) =>
+          <Route   exact path = '/login'     render    = { ( props ) =>
             <Login { ...props } /> } />
         </Switch>
       </div>

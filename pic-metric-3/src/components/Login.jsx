@@ -31,6 +31,7 @@ const Login = props => {
           handleChange, handleBlur, handleSubmit
         } = props;
         return (
+          <div className='login-wrapper'>
           <form onSubmit = { handleSubmit }>
             <label>Email
               <input
@@ -66,6 +67,8 @@ const Login = props => {
             }
             <button type = 'submit' disabled = { isSubmitting }>Login</button>
           </form>
+          {/* navlinks for forgot password and register */}
+          </div>
         );
       } }
     </Formik>
