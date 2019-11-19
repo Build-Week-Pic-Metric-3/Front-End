@@ -13,6 +13,7 @@ import {
 export const initialState = {
   user: {
     id: '',
+    email: '',
     photos: [ {
       id: '',
       url: '',
@@ -36,9 +37,13 @@ export const reducer = (state = initialState, action) => {
         error: null
       }
     case LOGIN_SUCCESS:
-      sessionStorage.setItem('token', action.payload);
+      sessionStorage.setItem('token', action.payload.token );
       return {
         ...state,
+        user: { ...state.user,
+          id: action.payload.id,
+          email: action.payload.username
+        },
         isLoggedIn: true,
         isFetching: false,
         error: null
@@ -56,10 +61,10 @@ export const reducer = (state = initialState, action) => {
         error: null
       }
     case REGISTER_SUCCESS:
-      sessionStorage.setItem('token', action.payload);
+      // sessionStorage.setItem('token', action.payload);
       return {
         ...state,
-        isLoggedIn: true,
+        isLoggedIn: false,
         isFetching: false,
         error: null
       }
