@@ -7,8 +7,8 @@ import {
   DELETE,
   DELETE_FAILED,
   REGISTER_LOADING,
-  REGISTER_FAILED
-} from '../actions';
+  REGISTER_SUCCESS,
+  REGISTER_FAILED} from '../actions';
 
 export const initialState = {
   user: {
