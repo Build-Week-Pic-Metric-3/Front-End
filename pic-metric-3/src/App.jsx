@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login        from './components/Login';
 import Register     from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (

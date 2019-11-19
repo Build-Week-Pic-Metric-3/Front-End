@@ -27,12 +27,17 @@ const UploadOrBrowseChildren = styled.div`
 
 const UploadPhoto = props => {
 
+  const formPopup = () => {
+    
+  }
+
   return (
     <UploadCont>
       <h3>Upload A Photo</h3>
       <UploadOrBrowseCont>
         <UploadOrBrowseChildren>
-          New Photo
+          <h3>New Photo</h3>
+          <button>Upload</button>
         </UploadOrBrowseChildren>
         <UploadOrBrowseChildren>
           Browse Existing Photos
