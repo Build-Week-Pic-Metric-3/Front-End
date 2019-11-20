@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-
+/* 
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import * as Yup from 'yup'; */
 
 import NavBar from './NavBar';
 import UploadPhoto from './UploadPhoto';
@@ -22,7 +22,7 @@ const Dashboard = props => {
           <h3>Welcome to Pic Metric 3!</h3>
         </Welcome>
       <UploadPhoto />
-      <Gallery user={props.user}/>
+      <Gallery user={ props.user }/>
     </div>
   )
 }

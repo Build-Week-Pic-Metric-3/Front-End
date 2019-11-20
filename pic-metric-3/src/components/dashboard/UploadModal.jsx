@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Form, Field, withFormik } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { dsSubmit } from '../../actions';
@@ -23,70 +23,68 @@ const CloseButton = styled.div`
   cursor: pointer;
 `
 
-const UploadModal = ({ togglePopup, values, errors, touched, status, user, dsSubmit, dispatch }) => {
-  useEffect(() => {
-    status && console.log(status) // axios.post to the backend
-  }, [status])
-  
-  return(
-    <ModalDiv>
-      <CloseButton onClick={togglePopup}>
-        x
-      </CloseButton>
-      <Form>
-        <Field type='text' name='photoURL' placeholder='enter photo url'/>
-        {errors.photoURL && (<p>{errors.photoURL}</p>)}
-        <Field type='file' name='photoFile' placeholder='Upload a Photo' />
-        {errors.photoFile && (<p>{errors.photoFile}</p>)}
-        <button type='submit'>Submit</button>
-      </Form>
-    </ModalDiv>
-  )
+const UploadModal = props => {
+
+  const dispatch = props.dispatch;
+
+  return (
+    <Formik
+      initialValues={ { file: '', url: '' } }
+      onSubmit={ ( values, { setSubmitting } ) => {
+        values.url ?
+          dispatch( dsSubmit( values.url  ) ) :
+          dispatch( dsSubmit( values.file ) )
+      }}
+      /* validationSchema={ Yup.object().shape({
+        photoURL: Yup.string()
+          .url( 'Invalid URL. Enter a valid URL (ex. https://google.com)' ),
+        photoFile: Yup.mixed()
+          .test( 'fileType', "Unsupported File Format", value => [ 'image/jpg', 'image/jpeg', 'image/gif', 'image/png' ].includes( value.type ) )
+      } ) } */
+    >
+      { props => {
+        const {
+          values, touched, errors, isSubmitting,
+          handleChange, handleBlur, handleSubmit
+        } = props;
+        return (
+          <ModalDiv>
+            <CloseButton onClick={ props.togglePopup }>
+              x
+            </CloseButton>
+            <form onSubmit = { handleSubmit }>
+              <input
+                type='url'
+                name='url'
+                placeholder='enter photo url'
+                value = { values.photoURL }
+                onChange = { handleChange }
+                onBlur = { handleBlur }
+                className = { errors.url && touched.url && 'error' }
+              />
+              {
+                props.errors.photoURL && ( <p>{ props.errors.photoURL }</p> )
+              }
+              <input
+                type='file'
+                name='file'
+                placeholder='Upload a Photo'
+                onChange = { handleChange }
+                onBlur = { handleBlur }
+              />
+              {
+                props.errors.photoFile && ( <p>{ props.errors.photoFile }</p> )
+                }
+              <button type = 'submit' disabled = { isSubmitting }>Submit</button>
+            </form>
+          </ModalDiv>
+        )
+      }}
+    </Formik>
+  );
 }
-
-const UploadModalWithFormik = withFormik({
-  mapPropsToValues({photoURL, photoFile}){
-    return {
-      photoURL: photoURL || '',
-      photoFile: photoFile || []
-    }
-  },
-  validationSchema: Yup.object().shape({
-    photoURL: Yup.string()
-      .url('Invalid URL. Enter a valid URL (ex. https://google.com)'),
-    photoFile: Yup.mixed()
-      .test('fileType', "Unsupported File Format", value => ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'].includes(value.type) )
-  }),
-  handleSubmit(values, { resetForm, setSubmitting, setStatus, dispatch, dsSubmit }) {
-    console.log("that's a url, nice", values)
-    // const dispatch = props.dispatch;
-    async function submit() {
-      await dispatch( dsSubmit() );
-    }
-    submit();
-
-    // const {photoURL} = values
-    // const dsSubmission = [photoURL];
-    // axios
-    //   .post('https://blahblahbackend.in', dsSubmission)
-    //   .then(response => {
-    //     setStatus(response.data);
-    //     setSubmitting();
-    //     resetForm();
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //     setSubmitting(false);
-    // });
-  }
-})(UploadModal);
 
 const mapDispatchToProps = {
   dsSubmit
 };
-
-const mapStateToProps = state => {
-  return { user: state.user}
-};
-
-export default connect(state => state)(UploadModalWithFormik); 
+export default connect( state => state )( UploadModal ); 

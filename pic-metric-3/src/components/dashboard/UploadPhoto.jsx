@@ -80,7 +80,7 @@ const UploadPhoto = props => {
     <UploadCont>
       <UploadOrBrowseCont>
         <UploadChild>
-          <UploadButton onClick={togglePopup}><i class="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
+          <UploadButton onClick={togglePopup}><i className="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
           <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
             <UploadModalWithFormik togglePopup={togglePopup} />
           </div>
