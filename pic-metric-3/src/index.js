@@ -4,14 +4,14 @@ import App      from './App';
 
 import './index.css';
 
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { composeWithDevTools }          from 'redux-devtools-extension';
 
 import logger       from 'redux-logger';
 import thunk        from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { reducer }  from './reducers';
+import { reducer } from './reducers';
 
 const store = createStore( reducer, composeWithDevTools( applyMiddleware( thunk, logger ) ) );
 
