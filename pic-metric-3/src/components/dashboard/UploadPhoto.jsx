@@ -27,7 +27,7 @@ const UploadChild = styled.div`
   justify-content: center;
   border: 10px solid white;
   height: 15rem;
-  width: 19rem;
+  width: 40%;
   background-image: url("https://images.unsplash.com/photo-1496816488620-48628a0724cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
   background-position: center;
   background-size: cover;
@@ -40,7 +40,7 @@ const BrowseChild = styled.div`
   justify-content: center;
   border: 1px solid #C3CFD9;
   height: 15rem;
-  width: 19rem;
+  width: 40%;
   padding: 1rem;
 `
 
