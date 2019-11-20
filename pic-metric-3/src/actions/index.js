@@ -185,7 +185,8 @@ export function DeletePhoto( id ) {
 }
 
 export function dsSubmit ( values ) {
-  return function( dispatch ) {
+  console.log( values );
+  /* return function( dispatch ) {
     dispatch( dsLoading )
     const { photoURL } = values
     const dsSubmission = [ photoURL ];
@@ -195,5 +196,5 @@ export function dsSubmit ( values ) {
       .then( res => console.log( res ) )
       // .then ( res   => dispatch( dsSubmitSuccess ( res.content   ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error ) ) );
-  }
+  } */
 }

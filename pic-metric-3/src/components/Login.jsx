@@ -12,7 +12,7 @@ const Login = props => {
     <Formik
       initialValues = { { email: '', password: '' } }
       onSubmit      = { ( values, { setSubmitting } ) => {
-        dispatch ( login( values.email, values.password, props.history ) );
+        dispatch(  login( values.email, values.password, props.history ) );
       } }
       validationSchema = { Yup.object().shape( {
         email:
@@ -31,41 +31,41 @@ const Login = props => {
         } = props;
         return (
           <div className='login-wrapper'>
-          <form onSubmit = { handleSubmit }>
-            <label>Email
-              <input
-                type        = "text"
-                name        = 'email'
-                placeholder = 'example@domain.com'
-                value       = { values.email }
-                onChange    = { handleChange }
-                onBlur      = { handleBlur   }
-                className   = { errors.email && touched.email && 'error' }
-              />
-            </label>
-            { 
-              errors.email && touched.email && (
-                <div className = 'input-feedback'>{ errors.email }</div>
-              )
-            }
-            <label>Password
-              <input
-                type        = 'text'
-                name        = 'password'
-                placeholder = 'password'
-                value       = { values.password }
-                onChange    = { handleChange    }
-                onBlur      = { handleBlur      }
-                className   = { errors.password && touched.password && 'error' }
-              />
-            </label>
-            {
-              errors.password && touched.password && (
-                <div className = 'input-feedback'>{ errors.password }</div>
-              )
-            }
-            <button type = 'submit' disabled = { isSubmitting }>Login</button>
-          </form>
+            <form onSubmit = { handleSubmit }>
+              <label>Email
+                <input
+                  type        = "text"
+                  name        = 'email'
+                  placeholder = 'example@domain.com'
+                  value       = { values.email }
+                  onChange    = { handleChange }
+                  onBlur      = { handleBlur   }
+                  className   = { errors.email && touched.email && 'error' }
+                />
+              </label>
+              { 
+                errors.email && touched.email && (
+                  <div className = 'input-feedback'>{ errors.email }</div>
+                )
+              }
+              <label>Password
+                <input
+                  type        = 'text'
+                  name        = 'password'
+                  placeholder = 'password'
+                  value       = { values.password }
+                  onChange    = { handleChange    }
+                  onBlur      = { handleBlur      }
+                  className   = { errors.password && touched.password && 'error' }
+                />
+              </label>
+              {
+                errors.password && touched.password && (
+                  <div className = 'input-feedback'>{ errors.password }</div>
+                )
+              }
+              <button type = 'submit' disabled = { isSubmitting }>Login</button>
+            </form>
           {/* navlinks for forgot password and register */}
           </div>
         );
@@ -74,20 +74,4 @@ const Login = props => {
   );
 }
 
-export default connect(state => state)(Login);
-
-  // const [ credentials, setCredentials ] = useState( { username: '', password: '' } );
-
-  /* 
-    const handleChange = e => {
-      setCredentials( {
-        ...credentials,
-        [ e.target.name ]: e.target.value
-      } );
-    };
-  
-    const handleSubmit = e => {
-      e.preventDefault();
-      dispatch( login( credentials.username, credentials.password, props.history ) );
-    };
-   */
+export default connect( state => state )( Login );

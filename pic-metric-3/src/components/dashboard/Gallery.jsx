@@ -19,20 +19,22 @@ const Img = styled.img`
 `
 
 const Gallery = props => {
-  const [ userData, setUserData] = useState(props.user);
+  const [ userData ] = useState(props.user.photos);
+  console.log(userData);
   
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
-        {/* { userData.map(image => {
+        { userData.map(photo => {
           return (
             <ImageCard 
-
+            photoID={photo.id}
+            photoURL={photo.url}
             />
             )
           })
-        } */}
+        }
         <Img src="https://images.unsplash.com/photo-1466074395296-41cba23ce4f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1068&q=80" alt="skateboard"/>
         <Img src="https://images.unsplash.com/photo-1485828877394-d0e861d7d16e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="clothes pin"/>
         <Img src="https://images.unsplash.com/photo-1464796147878-5d2c9706db89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" alt="bicycle seat"/>
