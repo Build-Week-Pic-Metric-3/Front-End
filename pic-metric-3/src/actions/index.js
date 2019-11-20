@@ -191,7 +191,7 @@ export function dsSubmit ( values ) {
     const dsSubmission = [ photoURL ];
   
     return axios
-      .post( 'http://18.222.7.26:5000/do_data_science', dsSubmission )
+      .post( 'http://3.16.113.251:5000/do_data_science', dsSubmission )
       .then( res => console.log( res ) )
       // .then ( res   => dispatch( dsSubmitSuccess ( res.content   ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error ) ) );
