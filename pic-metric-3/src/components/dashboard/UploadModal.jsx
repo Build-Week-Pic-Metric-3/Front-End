@@ -28,9 +28,9 @@ const UploadModal = props => {
 
   const dispatch = props.dispatch;
 
-  const onDrop = ( pictureFiles, pictureDataURLs ) => {
-    console.log( pictureFiles );
-    console.log( pictureDataURLs );
+  const onDrop = pic => {
+    console.log( pic );
+    
     // dispatch( dsSubmit( ) );
   };
   
