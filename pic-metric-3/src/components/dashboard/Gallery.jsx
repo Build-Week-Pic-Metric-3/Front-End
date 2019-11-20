@@ -31,6 +31,7 @@ const Gallery = props => {
             <ImageCard 
             photoID={photo.id}
             photoURL={photo.url}
+            photoPred={photo.pred}
             />
             )
           })
