@@ -23,3 +23,9 @@ code {
 .modal-visible {
   display: block;
 }
+
+.image-uploader {
+  position: absolute;
+  width: 30rem;
+  height: 30rem;
+}

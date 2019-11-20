@@ -6,24 +6,6 @@ import ImageUploader from 'react-images-upload';
 import { connect } from 'react-redux';
 import { dsSubmit } from '../../actions';
 
-const ModalDiv = styled.div`
-  position: absolute;
-  background: white;
-  z-index: 100;
-  height: 15rem;
-  width: 15rem;
-  top: calc(50% - 7.5rem);
-  right: calc(50% - 7.5rem);
-`
-
-const CloseButton = styled.div`
-  position: absolute;
-  right: 5%;
-  top: 5%;
-  font-size: 40px;
-  cursor: pointer;
-`
-
 const UploadModal = props => {
 
   const dispatch = props.dispatch;
@@ -41,6 +23,8 @@ const UploadModal = props => {
       onChange = { onDrop }
       imgExtension = { [ '.jpg', '.jpeg', '.png' ] }
       maxFileSize = { 5242880 }
+      className = {'image-uploader'}
+      withPreview = {true}
     />
   );
 }
@@ -108,3 +92,21 @@ return (
     </Formik>
   );
 */
+
+// const ModalDiv = styled.div`
+//   position: absolute;
+//   background: white;
+//   z-index: 100;
+//   height: 15rem;
+//   width: 15rem;
+//   top: calc(50% - 7.5rem);
+//   right: calc(50% - 7.5rem);
+// `
+
+// const CloseButton = styled.div`
+//   position: absolute;
+//   right: 5%;
+//   top: 5%;
+//   font-size: 40px;
+//   cursor: pointer;
+// `
