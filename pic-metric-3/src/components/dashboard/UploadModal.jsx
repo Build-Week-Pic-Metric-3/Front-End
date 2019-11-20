@@ -55,7 +55,11 @@ const UploadModalWithFormik = withFormik({
     photoURL: Yup.string()
       .url('Invalid URL. Enter a valid URL (ex. https://google.com)'),
     photoFile: Yup.mixed()
-      .test('fileType', "Unsupported File Format", value => ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'].includes(value.type) )
+      .test('fileType', "Unsupported File Format", value => {
+        console.log(value);
+        return ['jpg', 'image/jpeg', 'image/gif', 'image/png'].includes(value.type) 
+      })
+
   }),
   handleSubmit(values, { resetForm, setSubmitting, setStatus, dispatch, dsSubmit }) {
     console.log("that's a url, nice", values)
