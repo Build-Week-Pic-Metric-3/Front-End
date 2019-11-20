@@ -4,6 +4,10 @@ export const LOGIN_LOADING        = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS        = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED         = 'LOGIN_FAILED';
 
+export const LOGOUT_LOADING       = 'LOGOUT_LOADING';
+export const LOGOUT_SUCCESS       = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED        = 'LOGOUT_FAILED';
+
 export const REGISTER_LOADING     = 'REGISTER_LOADING';
 export const REGISTER_SUCCESS     = 'REGISTER_SUCCESS';
 export const REGISTER_FAILED      = 'REGISTER_FAILED';
@@ -27,6 +31,7 @@ export const registerLoading    = () => ( { type: REGISTER_LOADING     } );
 export const loginLoading       = () => ( { type: LOGIN_LOADING        } );
 export const fetchPhotosLoading = () => ( { type: FETCH_PHOTOS_LOADING } );
 export const dsLoading          = () => ( { type: DS_LOADING           } );
+export const logoutLoading      = () => ( { type: LOGOUT_LOADING       } );
 
 export const loginSuccess = ( data, history ) => {
   return dispatch => {
@@ -40,6 +45,21 @@ export const loginSuccess = ( data, history ) => {
 
 export const loginFailure = error => ( {
   type: LOGIN_FAILED,
+  payload: error
+} );
+
+export const logoutSuccess = ( history ) => {
+  return dispatch => {
+    dispatch( {
+      type: LOGOUT_SUCCESS,
+      payload: null
+    } );
+    history.push( '/' );
+  }
+};
+
+export const logoutFailure = error => ( {
+  type: LOGOUT_FAILED,
   payload: error
 } );
 
@@ -112,7 +132,6 @@ export function login( mail, pass, history ) {
 
     return axios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/login', { username: mail, password: pass } )
-      // .then( res => console.log( res ))
       .then ( res   => dispatch( loginSuccess( res.data, history ) ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
@@ -124,13 +143,10 @@ export function register( mail, pass, history ) {
 
     return axios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/register', { username: mail, password: pass } )
-      // .then ( res   => console.log(res))
       .then ( res   => dispatch( registerSuccess( res.data, pass, history ) ) )
       .catch( error => dispatch( registerFailure( error ) ) );
   }
 }
-
- 
 
 export function FetchPhotos( header ) {
   return function( dispatch ) {
@@ -176,7 +192,8 @@ export function dsSubmit ( values ) {
   
     return axios
       .post( 'http://18.222.7.26:5000/do_data_science', dsSubmission )
-      .then ( res   => dispatch( dsSubmitSuccess ( res   ) ) )
+      .then( res => console.log( res ) )
+      // .then ( res   => dispatch( dsSubmitSuccess ( res.content   ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error ) ) );
   }
 }

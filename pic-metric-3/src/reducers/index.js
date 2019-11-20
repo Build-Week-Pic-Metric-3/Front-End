@@ -8,7 +8,16 @@ import {
   DELETE_FAILED,
   REGISTER_LOADING,
   REGISTER_SUCCESS,
-  REGISTER_FAILED} from '../actions';
+  REGISTER_FAILED,
+  FETCH_PHOTOS_LOADING,
+  FETCH_PHOTOS_SUCCESS,
+  FETCH_PHOTOS_FAILED,
+  DS_LOADING,
+  DS_LOAD_SUCCESS,
+  DS_LOAD_FAILURE, 
+  LOGOUT_FAILED,
+  LOGOUT_LOADING,
+  LOGOUT_SUCCESS} from '../actions';
 
 export const initialState = {
   user: {
@@ -17,15 +26,16 @@ export const initialState = {
     photos: [ {
       id: '',
       url: '',
-      pred: [ {
-        id: 'resnet',
-        data: {}
-      } ]
+      pred: {
+        resnet: {},
+        yolo: {}
+      }
     } ]
   },
   isLoggedIn: sessionStorage.getItem('token') ? true : false,
-  error: null,
-  isFetching: false
+  error:      null,
+  isFetching: false,
+  isLoading:  false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -33,8 +43,9 @@ export const reducer = (state = initialState, action) => {
     case LOGIN_LOADING:
       return {
         ...state,
+        isLoading:  true,
         isFetching: false,
-        error: null
+        error:      null
       }
     case LOGIN_SUCCESS:
       sessionStorage.setItem('token', action.payload.token );
@@ -44,40 +55,117 @@ export const reducer = (state = initialState, action) => {
           id: action.payload.id,
           email: action.payload.username
         },
+        isLoading:  false,
         isLoggedIn: true,
         isFetching: false,
-        error: null
+        error:      null
       }
     case LOGIN_FAILED:
       return {
         ...state,
+        isLoading:  false,
+        isFetching: false,
+        error: action.payload
+      }
+    case LOGOUT_LOADING:
+      return {
+        ...state,
+        isLoading:  true,
+        isFetching: false,
+        error:      null
+      }
+    case LOGOUT_SUCCESS:
+      sessionStorage.removeItem( 'token' );
+      return {
+        ...state,
+        isLoading:  false,
+        isFetching: false,
+        error:      null
+      }
+    case LOGOUT_FAILED:
+      return {
+        ...state,
+        isLoading:  false,
         isFetching: false,
         error: action.payload
       }
     case REGISTER_LOADING:
       return {
         ...state,
+        isLoading:  true,
         isFetching: false,
-        error: null
+        error:      null
       }
     case REGISTER_SUCCESS:
-      // sessionStorage.setItem('token', action.payload);
       return {
         ...state,
+        isLoading:  false,
         isLoggedIn: false,
         isFetching: false,
-        error: null
+        error:      null
       }
     case REGISTER_FAILED:
       return {
         ...state,
+        isLoading:  false,
+        isFetching: false,
+        error: action.payload
+      }
+    case FETCH_PHOTOS_LOADING:
+      return {
+        ...state,
+        isLoading:  true,
+        isFetching: false,
+        error:      null
+      }
+    case FETCH_PHOTOS_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          photos: [ ...state.user.photos, action.payload ]
+        }
+      }
+    case FETCH_PHOTOS_FAILED:
+      return {
+        ...state,
+        isLoading:  false,
+        isFetching: false,
+        error: action.payload
+      }
+    case DS_LOADING:
+      return {
+        ...state,
+        isLoading:  true,
+        isFetching: false,
+        error:      null
+      }
+    case DS_LOAD_SUCCESS:
+      const newPhoto = {};
+      newPhoto.id    = action.payload.id
+      newPhoto.url   = action.payload.url
+      newPhoto.pred  = action.payload.pred
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          photos: [ ...state.user.photos, newPhoto ]
+        }
+      }
+    case DS_LOAD_FAILURE:
+      return {
+        ...state,
+        isLoading:  false,
         isFetching: false,
         error: action.payload
       }
     case ADD:
       return {
         ...state,
-        photos: [...state.photos, action.payload],
+        user: {
+          ...state.user,
+          photos: [ ...state.user.photos, action.payload ]
+        },
         error: null
       }
     case ADD_FAILED:
@@ -88,7 +176,10 @@ export const reducer = (state = initialState, action) => {
     case DELETE:
       return {
         ...state,
-        photos: state.photos.filter(photo => photo.id !== action.payload.data),
+        user: {
+          ...state.user,
+          photos: state.user.photos.filter( photo => photo.id !== action.payload.data ),
+        },
         error: null
       }
     case DELETE_FAILED:
