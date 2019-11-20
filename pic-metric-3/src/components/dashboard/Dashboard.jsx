@@ -22,13 +22,13 @@ const Dashboard = props => {
           <h3>Welcome to Pic Metric 3!</h3>
         </Welcome>
       <UploadPhoto />
-      <Gallery />
+      <Gallery user={props.user}/>
     </div>
   )
 }
 
 const mapStateToProps = state => {
-  return { user: state.user}
+  return { user: state.user }
 };
 
 export default connect(state => state)(Dashboard);

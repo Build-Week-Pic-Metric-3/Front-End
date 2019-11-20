@@ -36,6 +36,8 @@ const UploadModal = ({ togglePopup, values, errors, touched, status, user, dsSub
       <Form>
         <Field type='text' name='photoURL' placeholder='enter photo url'/>
         {errors.photoURL && (<p>{errors.photoURL}</p>)}
+        <Field type='file' name='photoFile' placeholder='Upload a Photo' />
+        {errors.photoFile && (<p>{errors.photoFile}</p>)}
         <button type='submit'>Submit</button>
       </Form>
     </ModalDiv>
@@ -43,15 +45,17 @@ const UploadModal = ({ togglePopup, values, errors, touched, status, user, dsSub
 }
 
 const UploadModalWithFormik = withFormik({
-  mapPropsToValues({photoURL}){
+  mapPropsToValues({photoURL, photoFile}){
     return {
-      photoURL: photoURL || ''
+      photoURL: photoURL || '',
+      photoFile: photoFile || []
     }
   },
   validationSchema: Yup.object().shape({
     photoURL: Yup.string()
-      .required('Enter your URL here')
-      .url('Invalid URL. Enter a valid URL (ex. https://google.com)')
+      .url('Invalid URL. Enter a valid URL (ex. https://google.com)'),
+    photoFile: Yup.mixed()
+      .test('fileType', "Unsupported File Format", value => ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'].includes(value.type) )
   }),
   handleSubmit(values, { resetForm, setSubmitting, setStatus, dispatch, dsSubmit }) {
     console.log("that's a url, nice", values)
