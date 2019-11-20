@@ -7,7 +7,7 @@ const UploadCont = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 27rem;
+  height: 22rem;
 `
 
 const UploadOrBrowseCont = styled.div`
@@ -17,14 +17,55 @@ const UploadOrBrowseCont = styled.div`
   background: #F7F9FA;
   width: 90%;
   height: 20rem;
-  margin-bottom: 2rem;
+  border: 1px solid #C3CFD9;
+  padding: 2rem;
 `
 
-const UploadOrBrowseChildren = styled.div`
-  border: 2px solid black;
+const UploadChild = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10px solid white;
   height: 15rem;
-  width: 15rem;
+  width: 19rem;
+  background-image: url("https://images.unsplash.com/photo-1496816488620-48628a0724cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+  background-position: center;
+  background-size: cover;
+`
 
+const BrowseChild = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #C3CFD9;
+  height: 15rem;
+  width: 19rem;
+  padding: 1rem;
+`
+
+const UploadButton = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  width: 10rem;
+  height: 2.5rem;
+  background: #D3455B;
+  border-radius: 5px;
+  padding: .5rem;
+`
+
+const BrowseButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 5rem;
+  height: 2rem;
+  background: #6558F5;
+  border-radius: 5px;
+  padding: .5rem;
 `
 
 const UploadPhoto = props => {
@@ -37,18 +78,18 @@ const UploadPhoto = props => {
 
   return (
     <UploadCont>
-      <h3>Upload A Photo</h3>
       <UploadOrBrowseCont>
-        <UploadOrBrowseChildren>
-          <h3>New Photo</h3>
-          <button onClick={togglePopup}>Upload</button>
+        <UploadChild>
+          <UploadButton onClick={togglePopup}><i class="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
           <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
             <UploadModalWithFormik togglePopup={togglePopup} />
           </div>
-        </UploadOrBrowseChildren>
-        <UploadOrBrowseChildren>
-          Browse Existing Photos
-        </UploadOrBrowseChildren>
+        </UploadChild>
+        <BrowseChild>
+          <h4>Pic Metric 3 uses machine learning to identify the contents of your photo</h4>
+          <p>Already upload photos? Browse your archive</p>
+          <BrowseButton>Browse</BrowseButton>
+        </BrowseChild>
       </UploadOrBrowseCont>
     </UploadCont>
   )
