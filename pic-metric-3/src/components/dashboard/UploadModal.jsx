@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+// import { Formik } from 'formik';
+// import * as Yup from 'yup';
+import ImageUploader from 'react-images-upload';
 import { connect } from 'react-redux';
 import { dsSubmit } from '../../actions';
 
@@ -27,7 +28,31 @@ const UploadModal = props => {
 
   const dispatch = props.dispatch;
 
+  const onDrop = ( pictureFiles, pictureDataURLs ) => {
+    console.log( pictureFiles );
+    console.log( pictureDataURLs );
+    // dispatch( dsSubmit( ) );
+  };
+  
   return (
+    <ImageUploader
+      withIcon = { true }
+      buttonText = 'Select Image'
+      onChange = { onDrop }
+      imgExtension = { [ '.jpg', '.jpeg', '.png' ] }
+      maxFileSize = { 5242880 }
+    />
+  );
+}
+
+const mapDispatchToProps = {
+  dsSubmit
+};
+export default connect( state => state )( UploadModal ); 
+
+
+/*
+return (
     <Formik
       initialValues={ { file: '', url: '' } }
       onSubmit={ ( values, { setSubmitting } ) => {
@@ -35,13 +60,13 @@ const UploadModal = props => {
           dispatch( dsSubmit( values.url  ) ) :
           dispatch( dsSubmit( values.file ) )
       }}
-      /* validationSchema={ Yup.object().shape({
+      validationSchema={ Yup.object().shape({
         photoURL: Yup.string()
           .url( 'Invalid URL. Enter a valid URL (ex. https://google.com)' ),
         photoFile: Yup.mixed()
           .test( 'fileType', "Unsupported File Format", value => [ 'image/jpg', 'image/jpeg', 'image/gif', 'image/png' ].includes( value.type ) )
-      } ) } */
-    >
+      } ) }
+      >
       { props => {
         const {
           values, touched, errors, isSubmitting,
@@ -82,9 +107,4 @@ const UploadModal = props => {
       }}
     </Formik>
   );
-}
-
-const mapDispatchToProps = {
-  dsSubmit
-};
-export default connect( state => state )( UploadModal ); 
+*/
