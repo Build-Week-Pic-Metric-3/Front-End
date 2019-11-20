@@ -33,7 +33,7 @@ const NavBar = props => {
         <Logo src={logo} alt="Pic Metric Logo"/>
         <p>Pic Metric 3</p>
       </LogoCont>
-      <i class="fas fa-chevron-circle-down"></i>
+      <i className="fas fa-chevron-circle-down"></i>
     </NavDiv>
   );
 };
