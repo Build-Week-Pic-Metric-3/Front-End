@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import logo from '../../../src/img/logo.png';
+import NavDropDown from './NavDropDown';
 
 const NavDiv = styled.div`
 display: flex;
@@ -27,14 +28,25 @@ const Logo = styled.img`
 
 const NavBar = props => {
 
+  const [ displayModal, setDisplayModal ] = useState(false);
+  
+  const togglePopup = () => {
+    setDisplayModal(!displayModal);
+  }
+
   return (
-    <NavDiv>
-      <LogoCont>
-        <Logo src={logo} alt="Pic Metric Logo"/>
-        <p>Pic Metric 3</p>
-      </LogoCont>
-      <i className="fas fa-chevron-circle-down"></i>
-    </NavDiv>
+    <React.Fragment>
+      <NavDiv>
+        <LogoCont>
+          <Logo src={logo} alt="Pic Metric Logo"/>
+          <p>Pic Metric 3</p>
+        </LogoCont>
+        <i onClick={togglePopup} className="fas fa-chevron-circle-down"></i>
+      </NavDiv>
+      <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
+        <NavDropDown />
+      </div>
+    </React.Fragment>
   );
 };
 
