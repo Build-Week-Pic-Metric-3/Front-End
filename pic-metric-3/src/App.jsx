@@ -12,9 +12,9 @@ function App() {
   return (
     
     <Router>
-      <div>
+      {/* <div>
         <Dashboard />
-      </div>
+      </div> */}
       <div className = 'App'>
         <Route exact path = '/'   render = { ( props ) =>
           <Login { ...props } /> } />
