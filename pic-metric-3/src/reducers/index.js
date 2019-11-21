@@ -118,20 +118,8 @@ export const reducer = ( state = initialState, action ) => {
         error:      null
       }
     case DS_LOAD_SUCCESS:
-      const newPhoto = {};
-      newPhoto.id    = action.payload.hash
-      newPhoto.url   = action.payload.original
-      newPhoto.pred  = {
-        resnet: action.payload.resnet,
-        yolo: action.payload.yolov3,
-        yoloImg: action.payload.yolov3_source
-      }
       return {
         ...state,
-        user: {
-          ...state.user,
-          photos: [ ...state.user.photos, newPhoto ]
-        }
       }
     case DS_LOAD_FAILURE:
       return {
@@ -141,8 +129,21 @@ export const reducer = ( state = initialState, action ) => {
         error: action.payload
       }
     case ADD:
+      const newPhoto        = {};
+      newPhoto.faces_source = action.payload.faces_source;
+      newPhoto.hash         = action.payload.hash;
+      newPhoto.id           = action.payload.id;
+      newPhoto.url          = action.payload.original;
+      newPhoto.user_id      = action.payload.user_id;
+      newPhoto.resnet       = action.payload.resnet;
+      newPhoto.yolo         = action.payload.yolov3;
+      newPhoto.yoloImg      = action.payload.yolov3_source;
       return {
         ...state,
+        user: {
+          ...state.user,
+          photos: [ ...state.user.photos, newPhoto ]
+        },
         error: null
       }
     case ADD_FAILED:
