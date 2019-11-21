@@ -47,7 +47,7 @@ const UploadModal = props => {
   };
 
   return (
-    <Background>
+    <Background onClick={ props.togglePopup }>
       <ModalDiv>
         <CloseButton onClick={ props.togglePopup }>X</CloseButton>
         <form onSubmit={onSubmit}>
