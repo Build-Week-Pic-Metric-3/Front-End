@@ -88,10 +88,15 @@ export const fetchPhotosFailure = error => ( {
   payload: error
 } );
 
-export const dsSubmitSuccess = data => ( {
-  type: DS_LOAD_SUCCESS,
-  payload: data
-} );
+export const dsSubmitSuccess = data => {
+  return dispatch => {
+    dispatch( {
+      type: DS_LOAD_SUCCESS,
+      payload: data
+    } );
+    dispatch( AddPhoto( data ) );
+  }
+};
 
 export const dsSubmitFailure = error => ( {
   type: DS_LOAD_FAILURE,
@@ -155,7 +160,7 @@ export function FetchPhotos( header ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .get  ( 'https://pic-metric-backend.herokuapp.com/api/photos' )
+      .get  ( 'https://pic-metric-backend.herokuapp.com/api/analysis' )
       .then ( res   => dispatch( fetchPhotosSuccess( res.data ) ) )
       .catch( error => dispatch( fetchPhotosFailure( error    ) ) );
   }
@@ -167,7 +172,7 @@ export function AddPhoto( photo ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .post ( 'https://pic-metric-backend.herokuapp.com/api/photos', photo   )
+      .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo   )
       .then ( res   => dispatch( addSuccess()      ) )
       .catch( error => dispatch( addFailure( error ) ) );
   }
@@ -190,7 +195,6 @@ export function dsSubmit ( pic ) {
   
     return axios
       .post( 'http://18.191.187.149:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 45000 } } )
-      // .then( res => console.log( res ) )
       .then ( res   => dispatch( dsSubmitSuccess ( res.data ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error    ) ) );
   }

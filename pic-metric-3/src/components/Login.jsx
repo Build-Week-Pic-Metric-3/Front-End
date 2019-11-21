@@ -1,9 +1,50 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../actions';
+import { login   } from '../actions';
+import { Formik  } from 'formik';
 
-import { Formik } from 'formik';
 import * as Yup from 'yup';
+import styled from 'styled-components';
+
+
+const Page  = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 { text-align: center; }
+`
+
+const LoginDiv = styled.div`
+  width: 80%;
+  min-width: 300px;
+  max-width: 600px;
+  display: flex;
+  padding: 1rem;
+  margin: 0 auto;
+  flex-direction: column;
+  align-self: center;
+  justify-content: space-evenly;
+  box-shadow: 0 0 12px rgba( 129, 143, 145, 0.4);
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    margin: 5px;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-evenly;
+  }
+`
 
 const Login = props => {
   const dispatch = props.dispatch;
@@ -30,9 +71,11 @@ const Login = props => {
           handleChange, handleBlur, handleSubmit
         } = props;
         return (
-          <div className='login-wrapper'>
-            <form onSubmit = { handleSubmit }>
-              <label>Email
+          <Page>
+            <h3>Welcome to Pic Metric 3!</h3>
+            <LoginDiv>
+              <form onSubmit = { handleSubmit }>
+                <label htmlFor='email'>Email</label>
                 <input
                   type        = "text"
                   name        = 'email'
@@ -42,13 +85,12 @@ const Login = props => {
                   onBlur      = { handleBlur   }
                   className   = { errors.email && touched.email && 'error' }
                 />
-              </label>
-              { 
-                errors.email && touched.email && (
-                  <div className = 'input-feedback'>{ errors.email }</div>
-                )
-              }
-              <label>Password
+                { 
+                  errors.email && touched.email && (
+                    <div className = 'input-feedback'>{ errors.email }</div>
+                  )
+                }
+                <label htmlFor='password'>Password</label>
                 <input
                   type        = 'text'
                   name        = 'password'
@@ -58,16 +100,18 @@ const Login = props => {
                   onBlur      = { handleBlur      }
                   className   = { errors.password && touched.password && 'error' }
                 />
-              </label>
-              {
-                errors.password && touched.password && (
-                  <div className = 'input-feedback'>{ errors.password }</div>
-                )
-              }
-              <button type = 'submit' disabled = { isSubmitting }>Login</button>
-            </form>
-          {/* navlinks for forgot password and register */}
-          </div>
+                {
+                  errors.password && touched.password && (
+                    <div className = 'input-feedback'>{ errors.password }</div>
+                  )
+                }
+                <div className='bottom'>
+                  <button type = 'submit' disabled = { isSubmitting }>Login</button>
+                  <NavLink to={ '/register' } className='link' activeClassName='link-active'>Register</NavLink>
+                </div>
+              </form>
+            </LoginDiv>
+          </Page>
         );
       } }
     </Formik>
