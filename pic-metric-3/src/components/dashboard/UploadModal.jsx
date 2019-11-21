@@ -36,6 +36,7 @@ const UploadModal = props => {
   const dispatch = props.dispatch;
 
   const fileSelectHandler = e => {
+    e.preventDefault();
     setPhoto(e.target.files[0]);
   };
 
@@ -47,7 +48,7 @@ const UploadModal = props => {
   };
 
   return (
-    <Background onClick={ props.togglePopup }>
+    <Background>
       <ModalDiv>
         <CloseButton onClick={ props.togglePopup }>X</CloseButton>
         <form onSubmit={onSubmit}>

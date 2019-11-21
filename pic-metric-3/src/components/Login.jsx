@@ -56,8 +56,8 @@ const Login = props => {
         dispatch(  login( values.email, values.password, props.history ) );
       } }
       validationSchema = { Yup.object().shape( {
-        // email:
-          // Yup.string().email().required( 'Required' ),
+        email:
+          Yup.string().email().required( 'Required' ),
         password:
           Yup.string()
             .required( 'No password provided.' )

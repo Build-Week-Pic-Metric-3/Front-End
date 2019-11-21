@@ -17,7 +17,7 @@ const Dashboard = props => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={ props.history } />
         <Welcome>
           <h3>Welcome to Pic Metric 3!</h3>
         </Welcome>

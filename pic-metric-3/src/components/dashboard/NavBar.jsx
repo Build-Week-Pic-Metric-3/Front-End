@@ -44,7 +44,7 @@ const NavBar = props => {
         <i onClick={togglePopup} className="fas fa-chevron-circle-down"></i>
       </NavDiv>
       <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
-        <NavDropDown />
+        <NavDropDown history={ props.history } />
       </div>
     </React.Fragment>
   );
