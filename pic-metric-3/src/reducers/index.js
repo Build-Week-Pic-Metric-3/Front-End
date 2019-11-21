@@ -130,14 +130,14 @@ export const reducer = ( state = initialState, action ) => {
       }
     case ADD:
       const newPhoto        = {};
-      newPhoto.faces_source = action.payload.faces_source
-      newPhoto.hash         = action.payload.hash
-      newPhoto.id           = action.payload.id
-      newPhoto.url          = action.payload.original
-      newPhoto.user_id      = action.payload.user_id
-      newPhoto.resnet       = action.payload.resnet,
-      newPhoto.yolo         = action.payload.yolov3,
-      newPhoto.yoloImg      = action.payload.yolov3_source
+      newPhoto.faces_source = action.payload.faces_source;
+      newPhoto.hash         = action.payload.hash;
+      newPhoto.id           = action.payload.id;
+      newPhoto.url          = action.payload.original;
+      newPhoto.user_id      = action.payload.user_id;
+      newPhoto.resnet       = action.payload.resnet;
+      newPhoto.yolo         = action.payload.yolov3;
+      newPhoto.yoloImg      = action.payload.yolov3_source;
       return {
         ...state,
         user: {
