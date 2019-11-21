@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
+import axios from 'axios';
 
 const GalleryCont = styled.div`
   background: #F7F9FA;
@@ -21,6 +22,13 @@ const Img = styled.img`
 const Gallery = props => {
   const [ userData ] = useState(props.user.photos);
   console.log(userData);
+
+  useEffect(() =>{
+    axios.get('https://pic-metric-backend.herokuapp.com/api/analysis')
+    .then(response => {
+      console.log(response);
+    })
+  }, []);
   
   return (
     <GalleryCont>
