@@ -4,9 +4,7 @@ export const LOGIN_LOADING        = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS        = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED         = 'LOGIN_FAILED';
 
-export const LOGOUT_LOADING       = 'LOGOUT_LOADING';
 export const LOGOUT_SUCCESS       = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILED        = 'LOGOUT_FAILED';
 
 export const REGISTER_LOADING     = 'REGISTER_LOADING';
 export const REGISTER_SUCCESS     = 'REGISTER_SUCCESS';
@@ -31,7 +29,6 @@ export const registerLoading    = () => ( { type: REGISTER_LOADING     } );
 export const loginLoading       = () => ( { type: LOGIN_LOADING        } );
 export const fetchPhotosLoading = () => ( { type: FETCH_PHOTOS_LOADING } );
 export const dsLoading          = () => ( { type: DS_LOADING           } );
-export const logoutLoading      = () => ( { type: LOGOUT_LOADING       } );
 
 export const loginSuccess = ( data, history ) => {
   return dispatch => {
@@ -40,6 +37,7 @@ export const loginSuccess = ( data, history ) => {
       payload: data
     } );
     history.push( '/protected' );
+    dispatch( FetchPhotos() );
   }
 };
 
@@ -48,7 +46,7 @@ export const loginFailure = error => ( {
   payload: error
 } );
 
-export const logoutSuccess = ( history ) => {
+export const logout = ( history ) => {
   return dispatch => {
     dispatch( {
       type: LOGOUT_SUCCESS,
@@ -57,11 +55,6 @@ export const logoutSuccess = ( history ) => {
     history.push( '/' );
   }
 };
-
-export const logoutFailure = error => ( {
-  type: LOGOUT_FAILED,
-  payload: error
-} );
 
 export const registerSuccess = ( data, pass, history ) => {
   return dispatch => {
@@ -153,7 +146,7 @@ export function register( mail, pass, history ) {
   }
 }
 
-export function FetchPhotos( header ) {
+export function FetchPhotos() {
   return function( dispatch ) {
     dispatch( fetchPhotosLoading() );
 

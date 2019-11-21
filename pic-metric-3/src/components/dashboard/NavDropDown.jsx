@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import { logout  } from '../../actions';
+
 const DropDown = styled.div`
   position: absolute;
   right: 7px;
@@ -14,6 +17,10 @@ const DropDown = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid #C3CFD9;
+  
+  p:hover {
+    cursor: pointer;
+  }
 `
 
 const DropDownSegment = styled.div`
@@ -23,18 +30,30 @@ const DropDownSegment = styled.div`
 `
 
 const NavDropDown = props => {
+
+  const dispatch = props.dispatch;
+
+  const leave = () => {
+    dispatch( logout( props.history ) );
+  }
   
   return (
     <DropDown>
-      <Link to = '/'>
+      {/* <Link to = '/'>
         <p>Return to Login</p>
-      </Link>
+      </Link> */}
+      <p onClick={ leave }>Logout</p>
       <DropDownSegment />
       <p>Browse Images</p>
       <DropDownSegment />
       <p>Another Thing</p>
+      
     </DropDown>
   )
 }
 
-export default NavDropDown;
+const mapDispatchToProps = {
+  logout
+};
+
+export default connect( state => state )( NavDropDown );

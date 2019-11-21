@@ -14,9 +14,7 @@ import {
   FETCH_PHOTOS_FAILED,
   DS_LOADING,
   DS_LOAD_SUCCESS,
-  DS_LOAD_FAILURE, 
-  LOGOUT_FAILED,
-  LOGOUT_LOADING,
+  DS_LOAD_FAILURE,
   LOGOUT_SUCCESS} from '../actions';
 
 export const initialState = {
@@ -60,13 +58,6 @@ export const reducer = ( state = initialState, action ) => {
         isFetching: false,
         error: action.payload
       }
-    case LOGOUT_LOADING:
-      return {
-        ...state,
-        isLoading:  true,
-        isFetching: false,
-        error:      null
-      }
     case LOGOUT_SUCCESS:
       sessionStorage.removeItem( 'token' );
       return {
@@ -74,13 +65,6 @@ export const reducer = ( state = initialState, action ) => {
         isLoading:  false,
         isFetching: false,
         error:      null
-      }
-    case LOGOUT_FAILED:
-      return {
-        ...state,
-        isLoading:  false,
-        isFetching: false,
-        error: action.payload
       }
     case REGISTER_LOADING:
       return {
@@ -116,7 +100,7 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         user: {
           ...state.user,
-          photos: [ ...state.user.photos, action.payload ]
+          photos: action.payload
         }
       }
     case FETCH_PHOTOS_FAILED:
@@ -159,10 +143,6 @@ export const reducer = ( state = initialState, action ) => {
     case ADD:
       return {
         ...state,
-        user: {
-          ...state.user,
-          photos: [ ...state.user.photos, action.payload ]
-        },
         error: null
       }
     case ADD_FAILED:
