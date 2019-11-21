@@ -3,6 +3,16 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { dsSubmit } from '../../actions';
 
+const ModalDiv = styled.div`
+  position: absolute;
+  background: white;
+  z-index: 100;
+  height: 15rem;
+  width: 15rem;
+  top: calc(50% - 7.5rem);
+  right: calc(50% - 7.5rem);
+`
+
 const UploadModal = props => {
   const [ photo, setPhoto ] = useState();
   const dispatch = props.dispatch;
@@ -19,12 +29,12 @@ const UploadModal = props => {
   };
 
   return (
-    <div>
+    <ModalDiv>
       <form onSubmit={onSubmit}>
         <input type="file" onChange={fileSelectHandler} />
         <button type="submit">Upload Photo Here</button>
       </form>
-    </div>
+    </ModalDiv>
   );
 }
 
