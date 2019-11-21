@@ -1,98 +1,47 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import axios from "axios";
+// import { dsSubmit } from "../../actions";
+import { connect } from "react-redux";
 
-import UploadModalWithFormik from './UploadModal';
-
-const UploadCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 22rem;
-`
-
-const UploadOrBrowseCont = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background: #F7F9FA;
-  width: 90%;
-  height: 20rem;
-  border: 1px solid #C3CFD9;
-  padding: 2rem;
-`
-
-const UploadChild = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 10px solid white;
-  height: 15rem;
-  width: 40%;
-  background-image: url("https://images.unsplash.com/photo-1496816488620-48628a0724cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
-  background-position: center;
-  background-size: cover;
-`
-
-const BrowseChild = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #C3CFD9;
-  height: 15rem;
-  width: 40%;
-  padding: 1rem;
-`
-
-const UploadButton = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
-  width: 10rem;
-  height: 2.5rem;
-  background: #D3455B;
-  border-radius: 5px;
-  padding: .5rem;
-`
-
-const BrowseButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  width: 5rem;
-  height: 2rem;
-  background: #6558F5;
-  border-radius: 5px;
-  padding: .5rem;
-`
+const DS_API = " http://18.191.187.149:5000/do_data_science";
 
 const UploadPhoto = props => {
+  // const { dispatch } = props;
+  const [photo, setPhoto] = useState();
 
-  const [displayModal, setDisplayModal] = useState(false);
+  const fileSelectHandler = e => {
+    setPhoto(e.target.files[0]);
+  };
 
-  const togglePopup = () => {
-    setDisplayModal(!displayModal);
-  }
+  const onSubmit = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", photo, "file");
+    const config = {
+      headers: { "content-type": "multipart/form-data" }
+    };
+
+    return axios
+      .post(DS_API, formData, config)
+      .then(res => {
+        console.log(res);
+        // set the response to state
+      })
+      .catch(err => console.log(err, "DS Api didnt like our request"));
+  };
 
   return (
-    <UploadCont>
-      <UploadOrBrowseCont>
-        <UploadChild>
-          <UploadButton onClick={togglePopup}><i className="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
-          <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
-            <UploadModalWithFormik togglePopup={togglePopup} />
-          </div>
-        </UploadChild>
-        <BrowseChild>
-          <h4>Pic Metric 3 uses machine learning to identify the contents of your photo</h4>
-          <p>Already upload photos? Browse your archive</p>
-          <BrowseButton>Browse</BrowseButton>
-        </BrowseChild>
-      </UploadOrBrowseCont>
-    </UploadCont>
-  )
-}
+    <div>
+      <form onSubmit={onSubmit}>
+        <input type="file" onChange={fileSelectHandler} />
+        <button type="submit">Upload Photo Here</button>
+      </form>
+    </div>
+  );
+};
 
-export default UploadPhoto;
+// const mapDispatchToProps = {
+//   dsSubmit
+// };
+
+export default connect(state => state)(UploadPhoto);
