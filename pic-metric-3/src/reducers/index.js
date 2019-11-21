@@ -21,16 +21,9 @@ import {
 
 export const initialState = {
   user: {
-    id: '',
+    id:    '',
     email: '',
-    photos: [ {
-      id: '',
-      url: '',
-      pred: {
-        resnet: {},
-        yolo: {}
-      }
-    } ]
+    photos: []
   },
   isLoggedIn: sessionStorage.getItem('token') ? true : false,
   error:      null,
@@ -38,8 +31,8 @@ export const initialState = {
   isLoading:  false
 };
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
+export const reducer = ( state = initialState, action ) => {
+  switch ( action.type ) {
     case LOGIN_LOADING:
       return {
         ...state,
@@ -48,7 +41,7 @@ export const reducer = (state = initialState, action) => {
         error:      null
       }
     case LOGIN_SUCCESS:
-      sessionStorage.setItem('token', action.payload.token );
+      sessionStorage.setItem( 'token', action.payload.token );
       return {
         ...state,
         user: { ...state.user,
@@ -142,9 +135,13 @@ export const reducer = (state = initialState, action) => {
       }
     case DS_LOAD_SUCCESS:
       const newPhoto = {};
-      newPhoto.id    = action.payload.id
-      newPhoto.url   = action.payload.url
-      newPhoto.pred  = action.payload.pred
+      newPhoto.id    = action.payload.hash
+      newPhoto.url   = action.payload.original
+      newPhoto.pred  = {
+        resnet: action.payload.resnet,
+        yolo: action.payload.yolov3,
+        yoloImg: action.payload.yolov3_source
+      }
       return {
         ...state,
         user: {
@@ -178,7 +175,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
-          photos: state.user.photos.filter( photo => photo.id !== action.payload.data ),
+          photos: state.user.photos.filter( photo => photo.id !== action.payload ),
         },
         error: null
       }
@@ -190,3 +187,20 @@ export const reducer = (state = initialState, action) => {
     default: return state;
   }
 };
+
+
+/* full user object layout
+user: {
+  id:    '',
+  email: '',
+  photos: [ {
+    id:  '',
+    url: '',
+    pred: {
+      resnet:  {},
+      yolo:    {},
+      yoloImg: ''
+    }
+  } ]
+}
+*/

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-import UploadModalWithFormik from './UploadModal';
+import UploadModal from './UploadModal';
 
 const UploadCont = styled.div`
   display: flex;
@@ -82,7 +82,7 @@ const UploadPhoto = props => {
         <UploadChild>
           <UploadButton onClick={togglePopup}><i className="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
           <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
-            <UploadModalWithFormik togglePopup={togglePopup} />
+            <UploadModal togglePopup={togglePopup} />
           </div>
         </UploadChild>
         <BrowseChild>
