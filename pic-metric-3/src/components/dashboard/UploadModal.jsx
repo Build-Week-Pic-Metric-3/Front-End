@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { connect  } from 'react-redux';
 import { dsSubmit } from '../../actions';
+
+
+const Background = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba( 33,33,33, 0.9 );
+`
 
 const ModalDiv = styled.div`
   position: absolute;
@@ -11,6 +21,14 @@ const ModalDiv = styled.div`
   width: 15rem;
   top: calc(50% - 7.5rem);
   right: calc(50% - 7.5rem);
+`
+
+const CloseButton = styled.div`
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-size: 40px;
+  cursor: pointer;
 `
 
 const UploadModal = props => {
@@ -29,12 +47,15 @@ const UploadModal = props => {
   };
 
   return (
-    <ModalDiv>
-      <form onSubmit={onSubmit}>
-        <input type="file" onChange={fileSelectHandler} />
-        <button type="submit">Upload Photo Here</button>
-      </form>
-    </ModalDiv>
+    <Background>
+      <ModalDiv>
+        <CloseButton onClick={ props.togglePopup }>X</CloseButton>
+        <form onSubmit={onSubmit}>
+          <input  type="file" onChange={fileSelectHandler} />
+          <button type="submit">Upload Photo Here</button>
+        </form>
+      </ModalDiv>
+    </Background>
   );
 }
 

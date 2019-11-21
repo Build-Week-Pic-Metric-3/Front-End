@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
+import uuid from 'uuid';
 
 const GalleryCont = styled.div`
   background: #F7F9FA;
@@ -29,6 +30,7 @@ const Gallery = props => {
         { userData.map(photo => {
           return (
             <ImageCard 
+            key={uuid.v4()}
             photoID={photo.id}
             photoURL={photo.url}
             photoPred={photo.pred}
