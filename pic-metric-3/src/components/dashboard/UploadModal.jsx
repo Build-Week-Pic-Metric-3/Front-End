@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 // import { Formik } from 'formik';
 // import * as Yup from 'yup';
-import ImageUploader from 'react-images-upload';
 import { connect } from 'react-redux';
 import { dsSubmit } from '../../actions';
 
@@ -25,23 +24,27 @@ const CloseButton = styled.div`
 `
 
 const UploadModal = props => {
-
+  const [ photo, setPhoto ] = useState();
   const dispatch = props.dispatch;
 
-  const onDrop = pic => {
-    console.log( pic );
-    
-    // dispatch( dsSubmit( ) );
+  const fileSelectHandler = e => {
+    setPhoto(e.target.files[0]);
   };
-  
+
+  const onSubmit = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append( 'file', photo, 'file' );
+    dispatch( dsSubmit( formData ) );
+  };
+
   return (
-    <ImageUploader
-      withIcon = { true }
-      buttonText = 'Select Image'
-      onChange = { onDrop }
-      imgExtension = { [ '.jpg', '.jpeg', '.png' ] }
-      maxFileSize = { 5242880 }
-    />
+    <div>
+      <form onSubmit={onSubmit}>
+        <input type="file" onChange={fileSelectHandler} />
+        <button type="submit">Upload Photo Here</button>
+      </form>
+    </div>
   );
 }
 
@@ -52,59 +55,19 @@ export default connect( state => state )( UploadModal );
 
 
 /*
-return (
-    <Formik
-      initialValues={ { file: '', url: '' } }
-      onSubmit={ ( values, { setSubmitting } ) => {
-        values.url ?
-          dispatch( dsSubmit( values.url  ) ) :
-          dispatch( dsSubmit( values.file ) )
-      }}
-      validationSchema={ Yup.object().shape({
-        photoURL: Yup.string()
-          .url( 'Invalid URL. Enter a valid URL (ex. https://google.com)' ),
-        photoFile: Yup.mixed()
-          .test( 'fileType', "Unsupported File Format", value => [ 'image/jpg', 'image/jpeg', 'image/gif', 'image/png' ].includes( value.type ) )
-      } ) }
-      >
-      { props => {
-        const {
-          values, touched, errors, isSubmitting,
-          handleChange, handleBlur, handleSubmit
-        } = props;
-        return (
-          <ModalDiv>
-            <CloseButton onClick={ props.togglePopup }>
-              x
-            </CloseButton>
-            <form onSubmit = { handleSubmit }>
-              <input
-                type='url'
-                name='url'
-                placeholder='enter photo url'
-                value = { values.photoURL }
-                onChange = { handleChange }
-                onBlur = { handleBlur }
-                className = { errors.url && touched.url && 'error' }
-              />
-              {
-                props.errors.photoURL && ( <p>{ props.errors.photoURL }</p> )
-              }
-              <input
-                type='file'
-                name='file'
-                placeholder='Upload a Photo'
-                onChange = { handleChange }
-                onBlur = { handleBlur }
-              />
-              {
-                props.errors.photoFile && ( <p>{ props.errors.photoFile }</p> )
-                }
-              <button type = 'submit' disabled = { isSubmitting }>Submit</button>
-            </form>
-          </ModalDiv>
-        )
-      }}
-    </Formik>
-  );
+{data: {…}, status: 200, statusText: "OK", headers: {…}, config: {…}, …}
+config: {url: "http://18.191.187.149:5000/do_data_science", method: "post", data: FormData, headers: {…}, transformRequest: Array(1), …}
+data:
+error: ""
+hash: "1b2b54c265edf1a4d243ba8a14ad958d"
+original: "http://picmetric3.s3.amazonaws.com/1b2b54c265edf1a4d243ba8a14ad958d.png"
+resnet: "{"kelpie": "0.4179342", "miniature_pinscher": "0.15857351", "Doberman": "0.09986181"}"
+source: "http://picmetric3.s3.amazonaws.com/f149b876e73c888d613ecbe66b234e58_yolov3.png"
+yolov3: "{"dog": "98.83676767349243"}"
+__proto__: Object
+headers: {content-length: "383", content-type: "application/json"}
+request: XMLHttpRequest {readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, onreadystatechange: ƒ, …}
+status: 200
+statusText: "OK"
+__proto__: Object
 */

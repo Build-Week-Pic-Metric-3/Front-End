@@ -184,17 +184,14 @@ export function DeletePhoto( id ) {
   }
 }
 
-export function dsSubmit ( values ) {
-  console.log( values );
-  /* return function( dispatch ) {
-    dispatch( dsLoading )
-    const { photoURL } = values
-    const dsSubmission = [ photoURL ];
+export function dsSubmit ( pic ) {
+  return function( dispatch ) {
+    dispatch( dsLoading );
   
     return axios
-      .post( 'http://3.16.113.251:5000/do_data_science', dsSubmission )
+      .post( 'http://18.191.187.149:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data' } } )
       .then( res => console.log( res ) )
       // .then ( res   => dispatch( dsSubmitSuccess ( res.content   ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error ) ) );
-  } */
+  }
 }
