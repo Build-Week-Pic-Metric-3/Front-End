@@ -85,7 +85,7 @@ export const dsSubmitSuccess = data => {
   return dispatch => {
     dispatch( {
       type: DS_LOAD_SUCCESS,
-      payload: data
+      payload: null
     } );
     dispatch( AddPhoto( data ) );
   }
@@ -96,9 +96,9 @@ export const dsSubmitFailure = error => ( {
   payload: error
 } );
 
-export const addSuccess = () => ( {
+export const addSuccess = data => ( {
   type: ADD,
-  payload: null
+  payload: data
 } );
 
 export const addFailure = error => ( {
@@ -166,8 +166,8 @@ export function AddPhoto( photo ) {
 
     return authAxios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo   )
-      .then ( res   => dispatch( addSuccess()      ) )
-      .catch( error => dispatch( addFailure( error ) ) );
+      .then ( res   => dispatch( addSuccess( res.data ) ) )
+      .catch( error => dispatch( addFailure( error    ) ) );
   }
 }
 
