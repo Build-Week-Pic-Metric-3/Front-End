@@ -56,12 +56,12 @@ const Login = props => {
         dispatch(  login( values.email, values.password, props.history ) );
       } }
       validationSchema = { Yup.object().shape( {
-        email:
-          Yup.string().email().required( 'Required' ),
+        // email:
+          // Yup.string().email().required( 'Required' ),
         password:
           Yup.string()
             .required( 'No password provided.' )
-            .min     ( 8, 'Password is too short - 8 chars minimum'    )
+            .min     ( 3, 'Password is too short - 3 chars minimum'    )
             .matches ( /(?=.*[0-9])/, 'Password must contain a number' )
       } ) }
     >
