@@ -23,13 +23,6 @@ const Img = styled.img`
 const Gallery = props => {
   const [ userData ] = useState(props.user.photos);
   console.log(userData);
-
-  useEffect(() =>{
-    axios.get('https://pic-metric-backend.herokuapp.com/api/analysis')
-    .then(response => {
-      console.log(response);
-    })
-  }, []);
   
   return (
     <GalleryCont>
