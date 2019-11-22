@@ -53,14 +53,15 @@ const UploadModal = props => {
         <CloseButton onClick={ props.togglePopup }>X</CloseButton>
         <form onSubmit={onSubmit}>
           <input  type="file" onChange={fileSelectHandler} />
-          <button type="submit">Upload Photo Here</button>
+          <button type="submit">Submit</button>
         </form>
       </ModalDiv>
     </Background>
   );
 }
-
+/* 
 const mapDispatchToProps = {
   dsSubmit
 };
+ */
 export default connect( state => state )( UploadModal ); 
