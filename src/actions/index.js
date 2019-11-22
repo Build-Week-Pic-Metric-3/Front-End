@@ -102,7 +102,7 @@ export const addSuccess = ( data, history ) => {
       type: ADD,
       payload: data
     } );
-    history.push( '/protected' );
+    // history.push( '/protected' );
   }
 };
 

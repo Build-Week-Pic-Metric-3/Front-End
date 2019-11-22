@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
 import uuid from 'uuid';
@@ -15,9 +16,9 @@ const ImgsCont = styled.div`
   align-items: flex-start;
 ` 
 const CardHolder = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
-  margin: 5px;
+  margin: 0 auto;
   padding: 5px;
   justify-content: space-evenly;
   background: #e1edf2;
@@ -28,7 +29,7 @@ const CardHolder = styled.div`
 `;
 
 const Gallery = props => {
-  const [ userData ] = useState(props.user.photos);
+  const [ userData ] = useState( props.photos );
   
   return (
     <GalleryCont>
@@ -60,4 +61,8 @@ const Gallery = props => {
   )
 }
 
-export default Gallery;
+const mapStateToProps = state => {
+  return { photos: state.user.photos }
+};
+
+export default connect( mapStateToProps )( Gallery );
