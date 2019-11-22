@@ -36,7 +36,7 @@ export const loginSuccess = ( data, history ) => {
       type: LOGIN_SUCCESS,
       payload: data
     } );
-    history.push( '/protected' );
+    history.push( '/dashboard' );
     dispatch( FetchPhotos() );
   }
 };
@@ -96,13 +96,12 @@ export const dsSubmitFailure = error => ( {
   payload: error
 } );
 
-export const addSuccess = ( data, history ) => {
+export const addSuccess = data => {
   return dispatch => {
     dispatch( {
       type: ADD,
       payload: data
     } );
-    // history.push( '/protected' );
   }
 };
 
