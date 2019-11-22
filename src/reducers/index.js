@@ -101,7 +101,10 @@ export const reducer = ( state = initialState, action ) => {
         user: {
           ...state.user,
           photos: action.payload
-        }
+        },
+        isLoading: false,
+        isFetching: false,
+        error: null
       }
     case FETCH_PHOTOS_FAILED:
       return {
@@ -120,6 +123,9 @@ export const reducer = ( state = initialState, action ) => {
     case DS_LOAD_SUCCESS:
       return {
         ...state,
+        isLoading: false,
+        isFetching: false,
+        error: null
       }
     case DS_LOAD_FAILURE:
       return {
@@ -175,13 +181,14 @@ user: {
   id:    '',
   email: '',
   photos: [ {
-    id:  '',
-    url: '',
-    pred: {
-      resnet:  {},
-      yolo:    {},
-      yoloImg: ''
-    }
+    id:            '',
+    user_id:       '',
+    original:      '',
+    hash:          '',
+    faces_source:  '',
+    resnet:        {},
+    yolov3:        {},
+    yolov3_source: ''
   } ]
 }
 */

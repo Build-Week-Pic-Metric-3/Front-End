@@ -46,7 +46,7 @@ const NavDropDown = props => {
       <DropDownSegment />
       <p>Browse Images</p>
       <DropDownSegment />
-      <p>Another Thing</p>
+      <p onClick={ () => localStorage.removeItem( 'persist:root' ) }>Delete Local Storage</p>
       
     </DropDown>
   )

@@ -4,7 +4,7 @@ import App      from './App';
 
 import './index.css';
 
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools }          from 'redux-devtools-extension';
 
 import logger       from 'redux-logger';
