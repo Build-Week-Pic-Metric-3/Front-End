@@ -44,7 +44,8 @@ const UploadModal = props => {
     e.preventDefault();
     const formData = new FormData();
     formData.append( 'file', photo, 'file' );
-    dispatch( dsSubmit( formData ) );
+    dispatch( dsSubmit( formData, props.history ) );
+    props.togglePopup();
   };
 
   return (

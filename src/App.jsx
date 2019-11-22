@@ -22,9 +22,10 @@ function App() {
           <Register { ...props } /> } />
         <Switch>
           <PrivateRoute path  = '/protected'>
-            <Route exact path = '/protected' component = { Dashboard } />
+            <Route exact path = '/protected' render = { ( props ) =>
+              <Dashboard { ...props } /> } />
           </PrivateRoute>
-          <Route   exact path = '/login'     render    = { ( props ) =>
+          <Route   exact path = '/login' render = { ( props ) =>
             <Login { ...props } /> } />
         </Switch>
       </div>

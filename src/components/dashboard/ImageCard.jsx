@@ -8,7 +8,7 @@ const ImgStyle = styled.img`
 const ImageCard = props => {
 
   return (
-    <div>
+    <div className='card'>
       <ImgStyle src={props.photoURL} alt="Image from user's saved photos"/>
       <p>{`${props.type} prediction: ${props.pred}`}</p>
     </div>
