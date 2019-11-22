@@ -59,9 +59,9 @@ const UploadModal = props => {
     </Background>
   );
 }
-/* 
+
 const mapDispatchToProps = {
   dsSubmit
 };
- */
+
 export default connect( state => state )( UploadModal ); 
