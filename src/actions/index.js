@@ -191,7 +191,7 @@ export function dsSubmit ( pic, history ) {
     dispatch( dsLoading() );
   
     return axios
-      .post( 'http://18.191.187.149:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 45000 } } )
+      .post( 'http://18.191.187.149:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 100000 } } )
       .then ( res   => dispatch( dsSubmitSuccess ( res.data, history ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error    ) ) );
   }
