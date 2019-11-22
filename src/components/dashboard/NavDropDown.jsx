@@ -56,4 +56,4 @@ const mapDispatchToProps = {
   logout
 };
 
-export default connect( state => state )( NavDropDown );
+export default connect( null,mapDispatchToProps )( NavDropDown );
