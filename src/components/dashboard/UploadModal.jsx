@@ -65,4 +65,4 @@ const mapDispatchToProps = {
   dsSubmit
 };
 
-export default connect( state => state )( UploadModal ); 
+export default connect( null, mapDispatchToProps )( UploadModal ); 
