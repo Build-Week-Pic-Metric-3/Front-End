@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
 import uuid from 'uuid';
-import axios from 'axios';
 
 const GalleryCont = styled.div`
   background: #F7F9FA;
@@ -16,10 +15,6 @@ const ImgsCont = styled.div`
   align-items: flex-start;
 ` 
 
-const Img = styled.img`
-  width: 30%;
-`
-
 const Gallery = props => {
   const [ userData ] = useState(props.user.photos);
   console.log(userData);
@@ -31,15 +26,23 @@ const Gallery = props => {
         { userData.map(photo => {
           console.log("fote",photo)
           const parsedResnet = photo.resnet ? JSON.parse(photo.resnet) : {None: null};
-          const parsedYolo = photo.yolo ? JSON.parse(photo.yolo) : {None: null};
+          const parsedYolo = photo.yolov3 ? JSON.parse(photo.yolov3) : {None: null};
+          // const parsedYoloImg = photo.yolov3_source ? JSON.parse(photo.yolov3_source) : {None: null};
           return (
-            <ImageCard 
-            key={uuid.v4()}
-            photoID={photo.id}
-            photoURL={photo.url}
-            resnetPred={Object.keys(parsedResnet)}
-            yoloPred={Object.keys(parsedYolo)}
-            />
+            <>
+              <ImageCard 
+                key={uuid.v4()}
+                type='resnet'
+                photoURL={photo.original}
+                pred={Object.keys(parsedResnet)}
+              />
+              <ImageCard
+                key={uuid.v4()}
+                type='yolo'
+                photoURL={photo.yolov3_source}
+                pred={Object.keys(parsedYolo)}
+              />
+            </>
             )
           })
         }

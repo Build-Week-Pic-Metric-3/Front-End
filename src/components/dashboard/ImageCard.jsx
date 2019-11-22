@@ -10,8 +10,7 @@ const ImageCard = props => {
   return (
     <div>
       <ImgStyle src={props.photoURL} alt="Image from user's saved photos"/>
-      <p>{`Yolo Prediction: ${props.yoloPred}`}</p>
-      <p>{`Resnet Predictions: ${props.resnetPred}`}</p>
+      <p>{`${props.type} prediction: ${props.pred}`}</p>
     </div>
   )
 }
