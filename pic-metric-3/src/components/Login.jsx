@@ -57,7 +57,7 @@ const Login = props => {
       } }
       validationSchema = { Yup.object().shape( {
         email:
-          Yup.string().email().required( 'Required' ),
+          Yup.string().required( 'Required' ),
         password:
           Yup.string()
             .required( 'No password provided.' )
