@@ -56,18 +56,6 @@ const UploadButton = styled.div`
   padding: .5rem;
 `
 
-const BrowseButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  width: 5rem;
-  height: 2rem;
-  background: #6558F5;
-  border-radius: 5px;
-  padding: .5rem;
-`
-
 const UploadPhoto = props => {
 
   const [displayModal, setDisplayModal] = useState(false);
