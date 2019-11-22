@@ -36,8 +36,9 @@ const Gallery = props => {
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
         { userData.map(photo => {
-          const parsedResnet = JSON.parse(photo.pred.resnet);
-          const parsedYolo = JSON.parse(photo.pred.yolo);
+          console.log("fote",photo)
+          const parsedResnet = photo.resnet ? JSON.parse(photo.resnet) : {None: null};
+          const parsedYolo = photo.yolo ? JSON.parse(photo.yolo) : {None: null};
           return (
             <ImageCard 
             key={uuid.v4()}
