@@ -21,8 +21,8 @@ function App() {
         <Route path = '/register' render = { ( props ) =>
           <Register { ...props } /> } />
         <Switch>
-          <PrivateRoute path  = '/protected'>
-            <Route exact path = '/protected' render = { ( props ) =>
+          <PrivateRoute path  = '/dashboard'>
+            <Route exact path = '/dashboard' render = { ( props ) =>
               <Dashboard { ...props } /> } />
           </PrivateRoute>
           <Route   exact path = '/login' render = { ( props ) =>
