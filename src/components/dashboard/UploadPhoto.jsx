@@ -70,7 +70,7 @@ const UploadPhoto = props => {
         <UploadChild>
           <UploadButton onClick={togglePopup}><i className="fas fa-upload"></i><p>Upload A Photo</p></UploadButton>
           <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
-            <UploadModal togglePopup={togglePopup} />
+            <UploadModal togglePopup={togglePopup} history={ props.history } />
           </div>
         </UploadChild>
         <BrowseChild>

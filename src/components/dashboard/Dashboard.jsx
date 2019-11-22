@@ -21,7 +21,7 @@ const Dashboard = props => {
         <Welcome>
           <h3>Welcome to Pic Metric 3!</h3>
         </Welcome>
-      <UploadPhoto />
+      <UploadPhoto history={ props.history } />
       <Gallery user={ props.user }/>
     </div>
   )

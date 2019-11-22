@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
 import uuid from 'uuid';
@@ -8,41 +8,50 @@ const GalleryCont = styled.div`
   width: 90%;
   margin: auto;
 `
-
 const ImgsCont = styled.div`
   display: flex;
+  flex-flow: column;
   justify-content: space-evenly;
   align-items: flex-start;
 ` 
+const CardHolder = styled.div`
+  width: 100%;
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+  justify-content: space-evenly;
+  background: #e1edf2;
+
+  .card {
+    width: 40%;
+  }
+`;
 
 const Gallery = props => {
   const [ userData ] = useState(props.user.photos);
-  console.log(userData);
   
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
         { userData.map(photo => {
-          console.log("fote",photo)
-          const parsedResnet = photo.resnet ? JSON.parse(photo.resnet) : {None: null};
-          const parsedYolo = photo.yolov3 ? JSON.parse(photo.yolov3) : {None: null};
-          // const parsedYoloImg = photo.yolov3_source ? JSON.parse(photo.yolov3_source) : {None: null};
+          const parsedResnet = photo.resnet ? JSON.parse( photo.resnet ) : { None: null };
+          const parsedYolo   = photo.yolov3 ? JSON.parse( photo.yolov3 ) : { None: null };
           return (
-            <>
-              <ImageCard 
-                key={uuid.v4()}
+            <CardHolder key={ uuid.v4() }>
+              <ImageCard
+                key={ uuid.v4() }
                 type='resnet'
-                photoURL={photo.original}
-                pred={Object.keys(parsedResnet)}
+                photoURL={ photo.original}
+                pred={ Object.keys( parsedResnet ) }
               />
               <ImageCard
-                key={uuid.v4()}
+                key={ uuid.v4() }
                 type='yolo'
-                photoURL={photo.yolov3_source}
-                pred={Object.keys(parsedYolo)}
+                photoURL={ photo.yolov3_source }
+                pred={ Object.keys( parsedYolo ) }
               />
-            </>
+            </CardHolder>
             )
           })
         }

@@ -81,13 +81,13 @@ export const fetchPhotosFailure = error => ( {
   payload: error
 } );
 
-export const dsSubmitSuccess = data => {
+export const dsSubmitSuccess = ( data, history ) => {
   return dispatch => {
     dispatch( {
       type: DS_LOAD_SUCCESS,
       payload: null
     } );
-    dispatch( AddPhoto( data ) );
+    dispatch( AddPhoto( data, history ) );
   }
 };
 
@@ -96,10 +96,15 @@ export const dsSubmitFailure = error => ( {
   payload: error
 } );
 
-export const addSuccess = data => ( {
-  type: ADD,
-  payload: data
-} );
+export const addSuccess = ( data, history ) => {
+  return dispatch => {
+    dispatch( {
+      type: ADD,
+      payload: data
+    } );
+    history.push( '/protected' );
+  }
+};
 
 export const addFailure = error => ( {
   type: ADD_FAILED,
@@ -159,14 +164,14 @@ export function FetchPhotos() {
   }
 }
 
-export function AddPhoto( photo ) {
+export function AddPhoto( photo, history ) {
   return function( dispatch ) {
 
     const authAxios = axiosWithAuth();
 
     return authAxios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo   )
-      .then ( res   => dispatch( addSuccess( res.data ) ) )
+      .then ( res   => dispatch( addSuccess( res.data, history ) ) )
       .catch( error => dispatch( addFailure( error    ) ) );
   }
 }
@@ -182,13 +187,13 @@ export function DeletePhoto( id ) {
   }
 }
 
-export function dsSubmit ( pic ) {
+export function dsSubmit ( pic, history ) {
   return function( dispatch ) {
-    dispatch( dsLoading );
+    dispatch( dsLoading() );
   
     return axios
       .post( 'http://18.191.187.149:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 45000 } } )
-      .then ( res   => dispatch( dsSubmitSuccess ( res.data ) ) )
+      .then ( res   => dispatch( dsSubmitSuccess ( res.data, history ) ) )
       .catch( error => dispatch( dsSubmitFailure ( error    ) ) );
   }
 }
