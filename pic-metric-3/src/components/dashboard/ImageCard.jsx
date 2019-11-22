@@ -1,11 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ImgStyle = styled.img`
+  width: 20rem;
+`
 
 const ImageCard = props => {
 
   return (
     <div>
-      <img src={props.photoURL} alt="Image from user's saved photos"/>
-      <p>{`Photo ID: ${props.photoID}`}</p>
+      <ImgStyle src={props.photoURL} alt="Image from user's saved photos"/>
+      <p>{`Yolo Prediction: ${props.yoloPred}`}</p>
+      <p>{`Resnet Predictions: ${props.resnetPred}`}</p>
     </div>
   )
 }
