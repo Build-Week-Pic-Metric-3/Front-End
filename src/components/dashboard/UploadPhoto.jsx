@@ -87,8 +87,7 @@ const UploadPhoto = props => {
         </UploadChild>
         <BrowseChild>
           <h4>Pic Metric 3 uses machine learning to identify the contents of your photo</h4>
-          <p>Already upload photos? Browse your archive</p>
-          <BrowseButton>Browse</BrowseButton>
+          <p>Already upload photos? Browse your photos below</p>
         </BrowseChild>
       </UploadOrBrowseCont>
     </UploadCont>
