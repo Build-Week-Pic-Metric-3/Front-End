@@ -23,21 +23,15 @@ const Img = styled.img`
 const Gallery = props => {
   const [ userData ] = useState(props.user.photos);
   console.log(userData);
-
-  useEffect(() =>{
-    axios.get('https://pic-metric-backend.herokuapp.com/api/analysis')
-    .then(response => {
-      console.log(response);
-    })
-  }, []);
   
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
         { userData.map(photo => {
-          const parsedResnet = JSON.parse(photo.pred.resnet);
-          const parsedYolo = JSON.parse(photo.pred.yolo);
+          console.log("fote",photo)
+          const parsedResnet = photo.resnet ? JSON.parse(photo.resnet) : {None: null};
+          const parsedYolo = photo.yolo ? JSON.parse(photo.yolo) : {None: null};
           return (
             <ImageCard 
             key={uuid.v4()}
