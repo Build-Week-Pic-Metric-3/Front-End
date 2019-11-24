@@ -37,7 +37,7 @@ export const loginSuccess = ( data, history ) => {
       payload: data
     } );
     history.push( '/dashboard' );
-    dispatch( FetchPhotos() );
+    dispatch( FetchPhotos()    );
   }
 };
 
@@ -91,10 +91,15 @@ export const dsSubmitSuccess = ( data, history ) => {
   }
 };
 
-export const dsSubmitFailure = error => ( {
-  type: DS_LOAD_FAILURE,
-  payload: error
-} );
+export const dsSubmitFailure = error => {
+  return dispatch => {
+   dispatch( {
+     type: DS_LOAD_FAILURE,
+      payload: error
+   } );
+   alert( 'The image submission to the Data Science backend for analysis has failed. Please try again. Second submissions usually succeed...' )
+  }
+};
 
 export const addSuccess = data => {
   return dispatch => {
@@ -102,6 +107,7 @@ export const addSuccess = data => {
       type: ADD,
       payload: data
     } );
+    alert( 'The image has been successfully analysed and submitted to the database' );
   }
 };
 
@@ -129,24 +135,24 @@ const axiosWithAuth = () => {
 };
 
 export function login( mail, pass, history ) {
-  return function( dispatch ) {
+  return function( dispatch  ) {
     dispatch( loginLoading() );
 
     return axios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/login', { username: mail, password: pass } )
       .then ( res   => dispatch( loginSuccess( res.data, history ) ) )
-      .catch( error => dispatch( loginFailure( error ) ) );
+      .catch( error => dispatch( loginFailure( error             ) ) );
   }
 }
 
 export function register( mail, pass, history ) {
-  return function( dispatch ) {
+  return function( dispatch     ) {
     dispatch( registerLoading() );
 
     return axios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/auth/register', { username: mail, password: pass } )
       .then ( res   => dispatch( registerSuccess( res.data, pass, history ) ) )
-      .catch( error => dispatch( registerFailure( error ) ) );
+      .catch( error => dispatch( registerFailure( error                   ) ) );
   }
 }
 
@@ -171,7 +177,7 @@ export function AddPhoto( photo, history ) {
     return authAxios
       .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo   )
       .then ( res   => dispatch( addSuccess( res.data, history ) ) )
-      .catch( error => dispatch( addFailure( error    ) ) );
+      .catch( error => dispatch( addFailure( error             ) ) );
   }
 }
 
@@ -188,11 +194,11 @@ export function DeletePhoto( id ) {
 
 export function dsSubmit ( pic, history ) {
   return function( dispatch ) {
-    dispatch( dsLoading() );
+    dispatch( dsLoading()   );
   
     return axios
-      .post( 'http://distortedlogic.hopto.org:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 100000 } } )
+      .post ( 'http://distortedlogic.hopto.org:5000/do_data_science', pic, { headers: { 'content-type': 'multipart/form-data', timeout: 100000 } } )
       .then ( res   => dispatch( dsSubmitSuccess ( res.data, history ) ) )
-      .catch( error => dispatch( dsSubmitFailure ( error    ) ) );
+      .catch( error => dispatch( dsSubmitFailure ( error             ) ) );
   }
 }

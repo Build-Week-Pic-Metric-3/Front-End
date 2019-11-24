@@ -30,6 +30,9 @@ const CardHolder = styled.div`
 
 const Gallery = props => {
   const [ userData ] = useState( props.photos );
+
+  // create a state variable to manipulate and trigger component re-render
+  const [ trigger ] = useState( props.trigger );
   
   return (
     <GalleryCont>
@@ -62,7 +65,10 @@ const Gallery = props => {
 }
 
 const mapStateToProps = state => {
-  return { photos: state.user.photos }
+  return {
+    photos:  state.user.photos,
+    trigger: state.trigger
+  }
 };
 
 export default connect( mapStateToProps )( Gallery );
