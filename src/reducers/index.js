@@ -26,7 +26,8 @@ export const initialState = {
   isLoggedIn: sessionStorage.getItem('token') ? true : false,
   error:      null,
   isFetching: false,
-  isLoading:  false
+  isLoading:  false,
+  trigger: 0
 };
 
 export const reducer = ( state = initialState, action ) => {
@@ -150,7 +151,8 @@ export const reducer = ( state = initialState, action ) => {
           ...state.user,
           photos: [ ...state.user.photos, newPhoto ]
         },
-        error: null
+        error: null,
+        trigger: state.trigger++
       }
     case ADD_FAILED:
       return {
