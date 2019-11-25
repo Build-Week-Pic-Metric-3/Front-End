@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ImageCard from './ImageCard';
@@ -29,16 +29,12 @@ const CardHolder = styled.div`
 `;
 
 const Gallery = props => {
-  const [ userData ] = useState( props.photos );
-
-  // create a state variable to manipulate and trigger component re-render
-  const [ trigger ] = useState( props.trigger );
   
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
       <ImgsCont>
-        { userData.map(photo => {
+        { props.photos.map(photo => {
           const parsedResnet = photo.resnet ? JSON.parse( photo.resnet ) : { None: null };
           const parsedYolo   = photo.yolov3 ? JSON.parse( photo.yolov3 ) : { None: null };
           return (
@@ -66,8 +62,7 @@ const Gallery = props => {
 
 const mapStateToProps = state => {
   return {
-    photos:  state.user.photos,
-    trigger: state.trigger
+    photos:  state.user.photos
   }
 };
 

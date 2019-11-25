@@ -146,4 +146,4 @@ const Register = props => {
   );
 }
 
-export default connect( state => state )( Register );
+export default connect()( Register );

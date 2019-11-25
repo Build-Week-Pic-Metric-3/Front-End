@@ -118,4 +118,4 @@ const Login = props => {
   );
 }
 
-export default connect( state => state )( Login );
+export default connect()( Login );

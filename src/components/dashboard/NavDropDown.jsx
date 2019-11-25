@@ -39,9 +39,6 @@ const NavDropDown = props => {
   
   return (
     <DropDown>
-      {/* <Link to = '/'>
-        <p>Return to Login</p>
-      </Link> */}
       <p onClick={ leave }>Logout</p>
       <DropDownSegment />
       <p>Browse Images</p>
@@ -52,8 +49,4 @@ const NavDropDown = props => {
   )
 }
 
-const mapDispatchToProps = {
-  logout
-};
-
-export default connect( state => state )( NavDropDown );
+export default connect()( NavDropDown );
