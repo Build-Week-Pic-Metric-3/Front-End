@@ -107,7 +107,6 @@ export const addSuccess = data => {
       type: ADD,
       payload: data
     } );
-    alert( 'The image has been successfully analysed and submitted to the database' );
   }
 };
 
