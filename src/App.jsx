@@ -12,9 +12,6 @@ function App() {
   return (
     
     <Router>
-      {/* <div>
-        <Dashboard />
-      </div> */}
       <div className = 'App'>
         <Route exact path = '/'   render = { ( props ) =>
           <Login { ...props } /> } />

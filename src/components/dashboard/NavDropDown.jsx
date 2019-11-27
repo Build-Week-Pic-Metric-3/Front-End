@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { logout  } from '../../actions';
@@ -44,7 +43,6 @@ const NavDropDown = props => {
       <p>Browse Images</p>
       <DropDownSegment />
       <p onClick={ () => localStorage.removeItem( 'persist:root' ) }>Delete Local Storage</p>
-      
     </DropDown>
   )
 }

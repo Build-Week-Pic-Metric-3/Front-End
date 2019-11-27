@@ -11,23 +11,38 @@ const Background = styled.div`
   top: 0;
   left: 0;
   background-color: rgba( 33,33,33, 0.9 );
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `
 
 const ModalDiv = styled.div`
-  position: absolute;
+  position: relative;
   background: white;
-  z-index: 100;
-  height: 15rem;
-  width: 15rem;
-  top: calc(50% - 7.5rem);
-  right: calc(50% - 7.5rem);
+  z-index: 1;
+  height: 5rem;
+  width: 20rem;
+  overflow: hidden;
+
+  form {
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+    
+    input {
+      margin-top: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+  }
 `
 
 const CloseButton = styled.div`
   position: absolute;
-  right: 5%;
-  top: 5%;
-  font-size: 40px;
+  right: 0.4rem;
+  top: -0.3rem;
+  color: #611510;
+  font-size: 2rem;
+  font-family: none;
   cursor: pointer;
 `
 
@@ -51,7 +66,7 @@ const UploadModal = props => {
   return (
     <Background>
       <ModalDiv>
-        <CloseButton onClick={ props.togglePopup }>X</CloseButton>
+        <CloseButton onClick={ props.togglePopup }>x</CloseButton>
         <form onSubmit={onSubmit}>
           <input  type="file" onChange={fileSelectHandler} />
           <button type="submit">Submit</button>
