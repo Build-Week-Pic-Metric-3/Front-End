@@ -29,7 +29,7 @@ const CardHolder = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #C3CFD9;
 
     &:hover {
       cursor: pointer;
