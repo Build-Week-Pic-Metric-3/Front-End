@@ -27,12 +27,17 @@ const CardHolder = styled.div`
     height: 200px;
     padding: 4px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #C3CFD9;
 
     &:hover {
       cursor: pointer;
+    }
+
+    button {
+      margin-top: 4px;
     }
   }
 `
