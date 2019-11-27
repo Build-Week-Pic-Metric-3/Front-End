@@ -96,7 +96,7 @@ const Login = props => {
                 }
                 <label htmlFor='password'>Password</label>
                 <input
-                  type        = 'text'
+                  type        = 'password'
                   name        = 'password'
                   placeholder = 'password'
                   value       = { values.password }
