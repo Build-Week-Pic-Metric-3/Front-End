@@ -16,6 +16,7 @@ const DropDown = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid #C3CFD9;
+  font-size: 1rem;
   
   p:hover {
     cursor: pointer;

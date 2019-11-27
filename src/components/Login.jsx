@@ -43,6 +43,10 @@ const LoginDiv = styled.div`
   .bottom {
     display: flex;
     justify-content: space-evenly;
+
+    a {
+      font-size: 1rem;
+    }
   }
 `
 
