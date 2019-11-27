@@ -8,6 +8,11 @@ import NavBar from './NavBar';
 import UploadPhoto from './UploadPhoto';
 import Gallery from './Gallery';
 
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Welcome = styled.div`
   text-align: center;
 `
@@ -18,12 +23,9 @@ const override = css`
   border-color: red
 `
 const Dashboard = props => {
-  const centerText = {
-    'textAlign': 'center'
-  };
-
+  
   return (
-    <div>
+    <Page>
       <NavBar history={ props.history } />
       <Welcome>
         <h3>Welcome to Pic Metric 3!</h3>
@@ -35,13 +37,10 @@ const Dashboard = props => {
         size={100}
         color={'#00adb5'}
         loading={ props.isLoading } />
-      <h5 style={ centerText }>check the console log to see if image upload is successful,
-        also need to manually reload the page after successful upload
-        to refresh the gallery...   still wip</h5>
       <Gallery user={ props.user }/>
-    </div>
+    </Page>
   )
-}
+};
 
 const mapStateToProps = state => {
   return {

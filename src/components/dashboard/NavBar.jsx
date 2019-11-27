@@ -31,19 +31,19 @@ const NavBar = props => {
   const [ displayModal, setDisplayModal ] = useState(false);
   
   const togglePopup = () => {
-    setDisplayModal(!displayModal);
+    setDisplayModal( !displayModal );
   }
 
   return (
     <React.Fragment>
       <NavDiv>
         <LogoCont>
-          <Logo src={logo} alt="Pic Metric Logo"/>
+          <Logo src={ logo } alt="Pic Metric Logo"/>
           <p>Pic Metric 3</p>
         </LogoCont>
-        <i onClick={togglePopup} className="fas fa-chevron-circle-down"></i>
+        <i onClick={ togglePopup } className="fas fa-chevron-circle-down"></i>
       </NavDiv>
-      <div className={displayModal ? 'modal-visible' : 'modal-invisible'}>
+      <div className={ displayModal ? 'modal-visible' : 'modal-invisible' }>
         <NavDropDown history={ props.history } />
       </div>
     </React.Fragment>

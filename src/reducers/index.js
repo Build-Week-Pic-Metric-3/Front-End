@@ -26,8 +26,7 @@ export const initialState = {
   isLoggedIn: sessionStorage.getItem('token') ? true : false,
   error:      null,
   isFetching: false,
-  isLoading:  false,
-  trigger: 0
+  isLoading:  false
 };
 
 export const reducer = ( state = initialState, action ) => {
@@ -57,7 +56,7 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         isLoading:  false,
         isFetching: false,
-        error: action.payload
+        error:      action.payload
       }
     case LOGOUT_SUCCESS:
       sessionStorage.removeItem( 'token' );
@@ -87,7 +86,7 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         isLoading:  false,
         isFetching: false,
-        error: action.payload
+        error:      action.payload
       }
     case FETCH_PHOTOS_LOADING:
       return {
@@ -103,16 +102,16 @@ export const reducer = ( state = initialState, action ) => {
           ...state.user,
           photos: action.payload
         },
-        isLoading: false,
+        isLoading:  false,
         isFetching: false,
-        error: null
+        error:      null
       }
     case FETCH_PHOTOS_FAILED:
       return {
         ...state,
         isLoading:  false,
         isFetching: false,
-        error: action.payload
+        error:      action.payload
       }
     case DS_LOADING:
       return {
@@ -124,16 +123,16 @@ export const reducer = ( state = initialState, action ) => {
     case DS_LOAD_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading:  false,
         isFetching: false,
-        error: null
+        error:      null
       }
     case DS_LOAD_FAILURE:
       return {
         ...state,
         isLoading:  false,
         isFetching: false,
-        error: action.payload
+        error:      action.payload
       }
     case ADD:
       const newPhoto         = {};
@@ -151,8 +150,7 @@ export const reducer = ( state = initialState, action ) => {
           ...state.user,
           photos: [ ...state.user.photos, newPhoto ]
         },
-        error: null,
-        trigger: state.trigger++
+        error: null
       }
     case ADD_FAILED:
       return {

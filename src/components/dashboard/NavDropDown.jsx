@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { logout  } from '../../actions';
@@ -39,21 +38,13 @@ const NavDropDown = props => {
   
   return (
     <DropDown>
-      {/* <Link to = '/'>
-        <p>Return to Login</p>
-      </Link> */}
       <p onClick={ leave }>Logout</p>
       <DropDownSegment />
       <p>Browse Images</p>
       <DropDownSegment />
       <p onClick={ () => localStorage.removeItem( 'persist:root' ) }>Delete Local Storage</p>
-      
     </DropDown>
   )
 }
 
-const mapDispatchToProps = {
-  logout
-};
-
-export default connect( state => state )( NavDropDown );
+export default connect()( NavDropDown );

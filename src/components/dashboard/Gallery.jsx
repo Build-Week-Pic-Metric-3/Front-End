@@ -1,73 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import ImageCard from './ImageCard';
 import uuid from 'uuid';
+
+import ImageCard   from './ImageCard';
 
 const GalleryCont = styled.div`
   background: #F7F9FA;
   width: 90%;
   margin: auto;
 `
-const ImgsCont = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
-` 
+
 const CardHolder = styled.div`
   width: 90%;
   display: flex;
+  flex-flow: row wrap;
   margin: 0 auto;
   padding: 5px;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background: #e1edf2;
 
   .card {
-    width: 40%;
+    margin: 0.5rem 0.3rem 0;
+    max-width: 400px;
+    min-width: 200px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
-`;
+`
 
 const Gallery = props => {
-  const [ userData ] = useState( props.photos );
-
-  // create a state variable to manipulate and trigger component re-render
-  const [ trigger ] = useState( props.trigger );
-  
   return (
     <GalleryCont>
       <h3>Gallery - Your Saved Images</h3>
-      <ImgsCont>
-        { userData.map(photo => {
-          const parsedResnet = photo.resnet ? JSON.parse( photo.resnet ) : { None: null };
-          const parsedYolo   = photo.yolov3 ? JSON.parse( photo.yolov3 ) : { None: null };
+      <CardHolder>
+        { props.photos.map( photo => {
+          const key = uuid.v4();
           return (
-            <CardHolder key={ uuid.v4() }>
-              <ImageCard
-                key={ uuid.v4() }
-                type='resnet'
-                photoURL={ photo.original}
-                pred={ Object.keys( parsedResnet ) }
-              />
-              <ImageCard
-                key={ uuid.v4() }
-                type='yolo'
-                photoURL={ photo.yolov3_source }
-                pred={ Object.keys( parsedYolo ) }
-              />
-            </CardHolder>
-            )
-          })
-        }
-      </ImgsCont>
+            <ImageCard
+              photo={ photo }
+              key={ key }
+              toggleID={ key }
+            />
+          )
+        } ) }
+      </CardHolder>
     </GalleryCont>
   )
-}
+};
 
 const mapStateToProps = state => {
   return {
-    photos:  state.user.photos,
-    trigger: state.trigger
+    photos:  state.user.photos
   }
 };
 
