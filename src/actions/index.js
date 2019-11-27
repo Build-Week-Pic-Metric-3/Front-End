@@ -107,7 +107,6 @@ export const addSuccess = data => {
       type: ADD,
       payload: data
     } );
-    alert( 'The image has been successfully analysed and submitted to the database' );
   }
 };
 
@@ -175,7 +174,7 @@ export function AddPhoto( photo, history ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo   )
+      .post ( 'https://pic-metric-backend.herokuapp.com/api/analysis', photo )
       .then ( res   => dispatch( addSuccess( res.data, history ) ) )
       .catch( error => dispatch( addFailure( error             ) ) );
   }
@@ -186,7 +185,7 @@ export function DeletePhoto( id ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .delete( `https://pic-metric-backend.herokuapp.com/api/photos/${ id }`  )
+      .delete( `https://pic-metric-backend.herokuapp.com/api/analysis/${ id }` )
       .then  ( res   => dispatch( deleteSuccess( id    ) ) )
       .catch ( error => dispatch( deleteFailure( error ) ) );
   }

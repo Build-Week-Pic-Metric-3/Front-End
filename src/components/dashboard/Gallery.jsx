@@ -23,11 +23,21 @@ const CardHolder = styled.div`
 
   .card {
     margin: 0.5rem 0.3rem 0;
-    max-width: 400px;
-    min-width: 200px;
+    width: 200px;
+    height: 200px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #C3CFD9;
 
     &:hover {
       cursor: pointer;
+    }
+
+    button {
+      margin-top: 4px;
     }
   }
 `

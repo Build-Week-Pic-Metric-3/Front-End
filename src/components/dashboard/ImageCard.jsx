@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ResultsModal from './ResultsModal';
+import { DeletePhoto } from '../../actions';
+import { connect } from 'react-redux';
 
 const ImgStyle = styled.img`
   max-width: 100%;
-  max-height: 100%;
+  max-height: 88%;
 `
 
 class ImageCard extends React.Component {
@@ -36,9 +38,10 @@ class ImageCard extends React.Component {
               toggleID={ this.props.toggleID }
             />
         }
+        {/* <button onClick={ () => this.props.dispatch( DeletePhoto( this.props.photo.id ) ) }>Delete</button> */}
       </div>
     )
   }
 }
 
-export default ImageCard;
+export default connect()( ImageCard );
