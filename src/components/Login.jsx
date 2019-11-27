@@ -37,7 +37,7 @@ const LoginDiv = styled.div`
   }
 
   input {
-    margin: 5px;
+    margin: 5px 0;
   }
 
   .bottom {
