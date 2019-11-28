@@ -10,6 +10,7 @@ const GalleryCont = styled.div`
   background: #F7F9FA;
   width: 90%;
   margin: 2rem auto;
+  border: 1px solid #C3CFD9;
 
   h3 {
     padding-left: 1rem;
