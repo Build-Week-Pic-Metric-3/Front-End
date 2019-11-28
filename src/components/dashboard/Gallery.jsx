@@ -33,7 +33,7 @@ const CardHolder = styled.div`
     padding: 4px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background: #C3CFD9;
 
