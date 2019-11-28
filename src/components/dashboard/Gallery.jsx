@@ -39,6 +39,10 @@ const CardHolder = styled.div`
 
     &:hover {
       box-shadow: 0 0 8px rgba( 64, 77, 82, 0.8 );
+
+      button {
+        display: block;
+      }
     }
 
     button {
@@ -46,6 +50,7 @@ const CardHolder = styled.div`
       background: #F7F9FA;
       border: none;
       border-radius: 0.2rem;
+      display: none;
 
       &:hover {
         background: #e1edf2;
