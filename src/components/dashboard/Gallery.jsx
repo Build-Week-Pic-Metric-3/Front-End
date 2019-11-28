@@ -37,14 +37,20 @@ const CardHolder = styled.div`
     align-items: center;
     background: #C3CFD9;
 
+    &:hover {
+      box-shadow: 0 0 8px rgba( 64, 77, 82, 0.8 );
+    }
+
     button {
       margin-top: 4px;
       background: #F7F9FA;
       border: none;
+      border-radius: 0.2rem;
 
       &:hover {
         background: #e1edf2;
         cursor: pointer;
+        box-shadow: 0 0 4px rgba( 64, 77, 82, 0.8 );
       }
     }
   }
