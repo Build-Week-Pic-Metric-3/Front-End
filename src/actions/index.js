@@ -180,14 +180,14 @@ export function AddPhoto( photo, history ) {
   }
 }
 
-export function DeletePhoto( id ) {
+export function DeletePhoto( photoId ) {
   return function( dispatch ) {
     const authAxios = axiosWithAuth();
 
     return authAxios
-      .delete( `https://pic-metric-backend.herokuapp.com/api/analysis/${ id }` )
-      .then  ( res   => dispatch( deleteSuccess( id    ) ) )
-      .catch ( error => dispatch( deleteFailure( error ) ) );
+      .delete( 'https://pic-metric-backend.herokuapp.com/api/analysis', { id: photoId } )
+      .then  ( res   => dispatch( deleteSuccess( photoId ) ) )
+      .catch ( error => dispatch( deleteFailure( error   ) ) );
   }
 }
 
