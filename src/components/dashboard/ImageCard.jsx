@@ -8,6 +8,10 @@ import { connect } from 'react-redux';
 const ImgStyle = styled.img`
   max-width: 100%;
   max-height: 88%;
+  
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 class ImageCard extends React.Component {
@@ -38,7 +42,7 @@ class ImageCard extends React.Component {
               toggleID={ this.props.toggleID }
             />
         }
-        {/* <button onClick={ () => this.props.dispatch( DeletePhoto( this.props.photo.id ) ) }>Delete</button> */}
+        <button onClick={ () => this.props.dispatch( DeletePhoto( this.props.photo.id ) ) }>Delete</button>
       </div>
     )
   }

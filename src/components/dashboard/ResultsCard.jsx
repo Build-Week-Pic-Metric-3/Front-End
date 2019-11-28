@@ -10,7 +10,7 @@ const ResultsCard = props => {
   return (
     <div className='results'>
       <ImgStyle src={ props.photoURL } alt={ `${ props.type } image` } />
-      <p>{ `${ props.type } prediction: ${ props.pred }` }</p>
+      <h3>{ `${ props.type } prediction: ${ props.pred }` }</h3>
     </div>
   )
 }

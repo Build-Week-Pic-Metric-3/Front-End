@@ -9,20 +9,24 @@ import ImageCard   from './ImageCard';
 const GalleryCont = styled.div`
   background: #F7F9FA;
   width: 90%;
-  margin: auto;
+  margin: 2rem auto;
+
+  h3 {
+    padding-left: 1rem;
+  }
 `
 
 const CardHolder = styled.div`
-  width: 90%;
+  width: 98%;
   display: flex;
   flex-flow: row wrap;
   margin: 0 auto;
+  margin-bottom: 1rem;
   padding: 5px;
   justify-content: space-around;
-  background: #e1edf2;
 
   .card {
-    margin: 0.5rem 0.3rem 0;
+    margin: 0.5rem 0.3rem;
     width: 200px;
     height: 200px;
     padding: 4px;
@@ -30,14 +34,17 @@ const CardHolder = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #C3CFD9;
-
-    &:hover {
-      cursor: pointer;
-    }
+    background: #C3CFD9;
 
     button {
       margin-top: 4px;
+      background: #F7F9FA;
+      border: none;
+
+      &:hover {
+        background: #e1edf2;
+        cursor: pointer;
+      }
     }
   }
 `
@@ -45,7 +52,7 @@ const CardHolder = styled.div`
 const Gallery = props => {
   return (
     <GalleryCont>
-      <h3>Gallery - Your Saved Images</h3>
+      <h3>Gallery - Your Saved Images (click image to see analysis results)</h3>
       <CardHolder>
         { props.photos.map( photo => {
           const key = uuid.v4();
